@@ -1,0 +1,14 @@
+/* CSS styesheet for HTML JS Phonegap application - see index.html */
+
+h1 {
+	color: green;
+}
+	
+.bigbutton {
+	font-family: sans-serif;
+	font-size: 32pt;
+	color: blue;
+}
+#contenido{
+     background-color: #cccccc;
+	 }

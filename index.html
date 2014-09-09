@@ -1,0 +1,143 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Validacion de usuarios</title>
+  <link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
+  
+  <script type="text/javascript" charset="utf-8" src="phonegap.0.9.4.js"></script>
+  <script type="text/javascript" charset="utf-8" src="jquery-1.5.1.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="webintent.js"></script>
+  <script type="text/javascript" charset="utf-8" src="barcodescanner.js"></script>
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <script type="text/javascript" charset="utf-8" src="PluginCordova.js"></script>
+  
+  <script src="jquery.1.9.1.min.js"></script>
+  <script src="jquery.mobile-1.3.1.min.js"></script>
+  
+<!-- the javascript specifically for this application -->
+<style type="text/css">
+       
+	   .contenido{
+          background-image: url('images/bg_log_in.png');
+		  //background-repeat: repeat-x;//
+		   background-repeat: no-repeat;
+	   }
+	   .colortext{
+	    color:#fff;
+		text-align: center;
+	   }
+	   .logo{
+	      background-image: url('images/log_in_logo.png');
+		  background-repeat: no-repeat;
+		  width: 134px;
+		  height: 144px;
+		  margin-left: auto;
+          margin-right: auto;
+	   }	   
+</style>
+<script type="text/javascript" src="index.js"></script>
+</head>
+ 
+<body> 
+ 
+<div data-role="page" id="inicio" class="contenido">
+ 
+	<div data-role="header">
+		<h1>Autenticacion de Usuario</h1>
+	</div>
+    
+	<div data-role="content">	
+		<form id="formulario">
+		<div class="logo" align="center"></div>
+		<br><br><br>
+	
+  
+      			<div class="colortext"> Usuario</div>
+      			<input type="text" id="nombredeusuario" name="nombredeusuario">
+                <br>
+      			<div class="colortext"> Clave </div>
+     			<input type="password" id="clave" name="clave" >
+				<br>
+ 
+ 
+      			<input type="submit" value="Login" id="botonLogin">
+      
+    		</form>		
+			
+	</div>
+	 
+</div>
+ 
+<div data-role="page" id="home" class="contenido">
+ 
+	<div data-role="header">
+		<h1>Bienvenido</h1>
+	</div>
+ 
+	<div data-role="content">	
+
+	<button class="bigbutton" onclick="testScan()">Leer Código QR</button>
+    <p>
+    <h3>Numero de cedula:</h3>
+    <p>
+    <input type="text" value="" id="cedula" name="cedula" />
+    <p>
+    <h3>Resultado:</h3>
+    <p>
+    <input type="text" value="" id="resultado" name="resultado" />	
+	<p>
+	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	</div>
+ 
+</div>
+ 
+<script>
+function closeapp(){
+    document.getElementById("nombredeusuario").value="";
+	document.getElementById("clave").value="";
+    $.mobile.changePage("#inicio");
+}
+$('#formulario').submit(function() { 
+	
+	 
+	// recolecta los valores que inserto el usuario
+	var datosUsuario = $("#nombredeusuario").val()
+	var datosPassword = $("#clave").val()
+	
+  	archivoValidacion = "http://revolucion.mobi/ejemplos/phonegap/envioFormulario/validacion_de_datos.php?jsoncallback=?"
+ 
+	if(datosUsuario=="nexos" && datosPassword=="nexos"){
+	  document.getElementById("cedula").value="";
+	  document.getElementById("resultado").value="";
+	  $.mobile.changePage("#home");	  
+	}
+	else{
+	  alert("El usuario no es valido intenta de nuevo!");
+	}
+	
+	//conectar con el servidor
+	
+	/*$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+	.done(function(respuestaServer) {
+		
+		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
+		
+		if(respuestaServer.validacion == "ok"){
+		  
+		 	/// si la validacion es correcta, muestra la pantalla "home"
+			$.mobile.changePage("#home")
+		  
+		}else{
+		  
+		  /// ejecutar una conducta cuando la validacion falla
+		}
+  
+	})*/
+	return false;
+})
+	
+</script>
+ 
+</body>
+</html>
