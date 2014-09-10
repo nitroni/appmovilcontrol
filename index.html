@@ -5,47 +5,6 @@
 	<title>Ibono autentificación</title>
 	<link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
 	
-	<style>
-#scanButton
-{
-   position:absolute;
-   top:3px;
-   left:3px;
-   z-index:2;
-}
-
-.page
-{
-   position:absolute;
-   top:30px;
-   left:0px;
-   width:100%;
-   height:100%;
-   z-index:1;
-}
-
-#page2,
-#page3,
-#page4
-{
-	visibility:hidden;
-}
-
-#page2
-{
-	background-color:red;
-}
-
-#page3
-{
-	background-color:yellow;
-}
-
-#page4
-{
-	background-color:blue;
-}
-</style>
 	
 	<script type="text/javascript" charset="utf-8" src="jquery-1.5.1.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="webintent.js"></script>  
@@ -123,14 +82,15 @@
 	<div data-role="content">	
 
 	<button id = "scanButton" onclick="scanQR();">Scan QR Code</button>
-	
-	   <div class="rmm">
-            <ul>
-                <li><a href='#home'>Control de acceso</a></li>
-                <li><a href='#about-me'>Restaurante</a></li>
-            </ul>
-        </div>
-	
+    <p>
+    <h3>Numero de cedula:</h3>
+    <p>
+    <input type="text" value="" id="cedula" name="cedula" />
+    <p>
+    <h3>Resultado:</h3>
+    <p>
+    <input type="text" value="" id="resultado" name="resultado" />	
+	<p>
 	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
 	</div>
 	
