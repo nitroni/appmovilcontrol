@@ -2,13 +2,63 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Validacion de usuarios</title>
-  <link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
-  <script type="text/javascript" charset="utf-8" src="jquery-1.5.1.min.js"></script>
-  <script type="text/javascript" charset="utf-8" src="webintent.js"></script>
+	<title>Ibono autentificación</title>
+	<link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
+	
+	<style>
+#scanButton
+{
+   position:absolute;
+   top:3px;
+   left:3px;
+   z-index:2;
+}
+
+.page
+{
+   position:absolute;
+   top:30px;
+   left:0px;
+   width:100%;
+   height:100%;
+   z-index:1;
+}
+
+#page2,
+#page3,
+#page4
+{
+	visibility:hidden;
+}
+
+#page2
+{
+	background-color:red;
+}
+
+#page3
+{
+	background-color:yellow;
+}
+
+#page4
+{
+	background-color:blue;
+}
+</style>
+	
+	<script type="text/javascript" charset="utf-8" src="jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="webintent.js"></script>  
+	<script src="jquery.1.9.1.min.js"></script>
+	<script src="jquery.mobile-1.3.1.min.js"></script>
   
-  <script src="jquery.1.9.1.min.js"></script>
-  <script src="jquery.mobile-1.3.1.min.js"></script>
+  
+	<!-- This is needed to access the PhoneGap JavaScript -->
+	<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+	<!-- This is needed to access the QR Code plugin JavaScript -->
+	<script src="barcodescanner.js"></script>   
+	<script src="scanner.js"></script>   
+  
   
 <!-- the javascript specifically for this application -->
 <style type="text/css">
@@ -72,17 +122,32 @@
  
 	<div data-role="content">	
 
-	<button class="bigbutton" onclick="testScan()">Leer Código QR</button>
-    <p>
-    <h3>Numero de cedula:</h3>
-    <p>
-    <input type="text" value="" id="cedula" name="cedula" />
-    <p>
-    <h3>Resultado:</h3>
-    <p>
-    <input type="text" value="" id="resultado" name="resultado" />	
-	<p>
+	<button id = "scanButton" onclick="scanQR();">Scan QR Code</button>
+	
+	   <div class="rmm">
+            <ul>
+                <li><a href='#home'>Control de acceso</a></li>
+                <li><a href='#about-me'>Restaurante</a></li>
+            </ul>
+        </div>
+	
 	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	</div>
+	
+    <div class = "page" id="page1">
+	<h1>Page One</h1>
+	</div>
+
+	<div class = "page" id="page2">
+	<h1>Page Two</h1>
+	</div>
+
+	<div class = "page" id="page3">
+	<h1>Page Three</h1>
+	</div>
+
+	<div class = "page" id="page4">
+	<h1>Page Four</h1>
 	</div>
  
 </div>
