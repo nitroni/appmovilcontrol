@@ -2,12 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-	<title>Ibono autentificación</title>
+	<title>AppcIbono</title>
 	<link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
 	
-	
-	<script type="text/javascript" charset="utf-8" src="jquery-1.5.1.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="webintent.js"></script>  
 	<script src="jquery.1.9.1.min.js"></script>
 	<script src="jquery.mobile-1.3.1.min.js"></script>
   
@@ -97,21 +94,7 @@
 </div>
 
 
-<div class = "page" id="page1">
-<h1>Page One</h1>
-</div>
 
-<div class = "page" id="page2">
-<h1>Page Two</h1>
-</div>
-
-<div class = "page" id="page3">
-<h1>Page Three</h1>
-</div>
-
-<div class = "page" id="page4">
-<h1>Page Four</h1>
-</div>
 
  
 <script>
@@ -137,25 +120,6 @@ $('#formulario').submit(function() {
 	else{
 	  alert("El usuario no es valido intenta de nuevo!");
 	}
-	
-	//conectar con el servidor
-	
-	/*$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
-	.done(function(respuestaServer) {
-		
-		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
-		
-		if(respuestaServer.validacion == "ok"){
-		  
-		 	/// si la validacion es correcta, muestra la pantalla "home"
-			$.mobile.changePage("#home")
-		  
-		}else{
-		  
-		  /// ejecutar una conducta cuando la validacion falla
-		}
-  
-	})*/
 	return false;
 })
 	
