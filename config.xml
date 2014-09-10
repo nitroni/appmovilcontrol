@@ -2,9 +2,9 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id = "ie.dkit.derek.qr_code">
 
-<name>QR code Demo</name>
-<description>QR code plugin demo</description>
-<author email="derek.oreilly@dkit.ie" href="http://derek.dkit.ie">Derek O Reilly</author>
+<name>Control de acceso</name>
+<description>Control de acceso</description>
+<author email="derek.oreilly@dkit.ie" href="http://derek.dkit.ie">Control de acceso</author>
 <icon src="icon.png" />
 
 <!-- Core plugins -->
