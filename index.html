@@ -95,7 +95,6 @@ function hideAllPages()
 	document.getElementById('page3').style.visibility = 'hidden';		
 	document.getElementById('page4').style.visibility = 'hidden';
 }
-
 </script>
   
   
@@ -118,7 +117,13 @@ function hideAllPages()
 		  height: 144px;
 		  margin-left: auto;
           margin-right: auto;
-	   }	   
+	   }
+	   .logobar{
+	      background-image: url('images/logo_action_bar.png');
+		  background-repeat: no-repeat;
+		  width: 39px;
+		  height: 63px;
+	   }		   
 </style>
 <!--<script type="text/javascript" src="index.js"></script>-->
 
@@ -128,12 +133,9 @@ function hideAllPages()
 </head>
  
 <body> 
- <!-- login -->
+<!-- login -->
 <div data-role="page" id="inicio" class="contenido">
- 
-	<div data-role="header">
-		<h1>Autenticacion de Usuario</h1>
-	</div>    
+  
 	<div data-role="content">	
 		<form id="formulario">
 		<div class="logo" align="center"></div>
@@ -148,24 +150,22 @@ function hideAllPages()
  
       			<input type="submit" value="Login" id="botonLogin" onclick="login();">
       
-    		</form>		
-			
-	</div>
-	 
+    		</form>					
+	</div>	 
 </div>
 
  <!-- menu3 control de acceso-->
 <div data-role="page" id="scan" class="contenido">
- 
-	<div data-role="header">
-		<h1>Bienvenido</h1>
+
+	<div data-role="header"><div class="logobar" align="center"></div>
+		<h1>Scannear QR</h1>
 	</div>
  
 	<div data-role="content">	
 
 	<button id = "scanButton" onclick="scanQR();">Scannear QR</button>
     <p>
-    <h3>Numero de cedula:</h3>
+    <h3>Numero de c&eacute;dula:</h3>
     <p>
     <input type="text" value="" id="cedula" name="cedula" />
     <p>
@@ -173,14 +173,14 @@ function hideAllPages()
     <p>
     <input type="text" value="" id="resultado" name="resultado" />	
 	<p>
-	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
 
 <!-- menu2 control de acceso-->
 <div data-role="page" id="menucontrolscan" class="contenido">
  
-	<div data-role="header">
+	<div data-role="header"><div class="logobar" align="center"></div>
 		<h1>Control de acceso</h1>
 	</div>
  
@@ -189,19 +189,19 @@ function hideAllPages()
 	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
-	<a href="#scan" class="ui-link-inherit">Scannear código QR</a>
+	<a href="#scan" class="ui-link-inherit">Scannear c&oacute;digo QR</a>
 	</div>
 	</div>
 	</li>
-	
+	<br>
 	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
-	<a href="#scan" class="ui-link-inherit">Validar cédula del funcionario</a>
+	<a href="#ctvalcedula" class="ui-link-inherit">Validar c&eacute;dula del funcionario</a>
 	</div>
 	</div>
 	</li>
-	
+	<br>
 	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
@@ -211,14 +211,14 @@ function hideAllPages()
 	</li>
 	
     <p>  
-	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
 
 <!-- home -->
 <div data-role="page" id="home" class="contenido">
 
-	<div data-role="header">
+	<div data-role="header"><div class="logobar" align="center"></div>
 		<h1>Bienvenido</h1>
 	</div>
     <br><br>
@@ -242,11 +242,12 @@ function hideAllPages()
 <!-- menu1 control de acceso-->
 <div data-role="page" id="menucontrol" class="contenido">
  
-	<div data-role="header">
+	<div data-role="header"><div class="logobar" align="center"></div>
 		<h1>Sus eventos son:</h1>
 	</div>
  
 	<div data-role="content">	
+	<br>
 <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
@@ -254,12 +255,24 @@ function hideAllPages()
 	</div>
 	</div>
 	</li>
-	
-    <p>  
-	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+    <p><p>
+	<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
 
+<!-- validar cédula -->
+<div data-role="page" id="ctvalcedula" class="contenido">
+	<div data-role="header"><div class="logobar" align="center"></div>
+		<h1>Validar c&eacute;dula</h1>
+	</div>    
+	<div data-role="content">	
+      			<div class="colortext"> C&eacute;dula</div>
+      			<input type="text" id="numcedula" name="numcedula" onKeyPress="javascript:if(event.keyCode<48 || event.keyCode>57){return false;}">
+                <br>
+				<br>
+               <button id = "vcedu" onclick="validarcedula();">Confirmar c&eacute;dula</button>	
+	</div>	 
+</div>
 
 <script>
 function closeapp(){
@@ -282,18 +295,10 @@ $('#formulario').submit(function() {
 	}
 	return false;
 })
-function menucontrol(op){
-
-   if(op==1){
-   alert("entro");
-      window.location="#menucontrolscan";	  
-   }
-   if (op==2){
-   }
-   if (op==3){
-   }
-}	
+function validarcedula(){
+     alert("Este usuario tiene acceso");
+	 document.getElementById("numcedula").value="";
+}
 </script>
- 
 </body>
 </html>
