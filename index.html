@@ -154,7 +154,7 @@ function hideAllPages()
 	 
 </div>
  
-<div data-role="page" id="home" class="contenido">
+<div data-role="page" id="scan" class="contenido">
  
 	<div data-role="header">
 		<h1>Bienvenido</h1>
@@ -162,7 +162,7 @@ function hideAllPages()
  
 	<div data-role="content">	
 
-	<button id = "scanButton" onclick="scanQR();">Scan QR Code</button>
+	<button id = "scanButton" onclick="scanQR();">Scannear QR</button>
     <p>
     <h3>Numero de cedula:</h3>
     <p>
@@ -175,6 +175,67 @@ function hideAllPages()
 	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
 	</div>
 	
+</div>
+<div data-role="page" id="menucontrolscan" class="contenido">
+ 
+	<div data-role="header">
+		<h1>Control de acceso</h1>
+	</div>
+ 
+	<div data-role="content">	
+
+	<button id = "scanButton" onclick="scanQR();">Scannear código QR</button>
+	<button id = "scanButton" onclick="scanQR();">Validar cédula del funcionario</button>
+	<button id = "scanButton" onclick="scanQR();">Usuario anonimo</button>
+    <p>  
+	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	</div>	
+</div>
+
+<!-- home -->
+<div data-role="page" id="home" class="contenido">
+
+	<div data-role="header">
+		<h1>Bienvenido</h1>
+	</div>
+    <br><br>
+    <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#menucontrol" class="ui-link-inherit">Control de acceso</a>
+	</div>
+	</div>
+	</li>
+	<br>
+	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#scan" class="ui-link-inherit">Servicio de restaurante</a>
+	</div>
+	</div>
+	</li>
+
+</div>
+
+<div data-role="page" id="menucontrol" class="contenido">
+ 
+	<div data-role="header">
+		<h1>Sus eventos son:</h1>
+	</div>
+ 
+	<div data-role="content">	
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#menucontrolscan" class="ui-link-inherit">Evento1</a>
+	</div>
+	</div>
+	</li>
+	
+    <p>  
+	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
+	</div>	
 </div>
 
 
