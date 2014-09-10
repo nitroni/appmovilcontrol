@@ -158,7 +158,13 @@ function hideAllPages()
 <div data-role="page" id="scan" class="contenido">
 
 	<div data-role="header"><div class="logobar" align="center"></div>
-		<h1>Scannear QR</h1>
+		<h1>Scannear QR</h1><div data-role="navbar">
+	<ul>
+		<li><a href="">Entradas: 0</a></li>
+		<li><a href="">Salidas: 0</a></li>
+		<li><a href="">Total evento: 0</a></li>
+	</ul>
+</div>
 	</div>
  
 	<div data-role="content">	
@@ -217,7 +223,6 @@ function hideAllPages()
 
 <!-- home -->
 <div data-role="page" id="home" class="contenido">
-
 	<div data-role="header"><div class="logobar" align="center"></div>
 		<h1>Bienvenido</h1>
 	</div>
@@ -225,7 +230,7 @@ function hideAllPages()
     <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
-	<a href="#menucontrol" class="ui-link-inherit">Control de acceso</a>
+	<a href="#menucontrolscan" class="ui-link-inherit">Control de acceso: Evento Poblado</a>
 	</div>
 	</div>
 	</li>
@@ -233,7 +238,15 @@ function hideAllPages()
 	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
-	<a href="#scan" class="ui-link-inherit">Servicio de restaurante</a>
+	<a href="#menucontrolscan" class="ui-link-inherit">Control de acceso: Evento Centro</a>
+	</div>
+	</div>
+	</li>
+	<br>
+	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#scan" class="ui-link-inherit">Restaurante: Laureles </a>
 	</div>
 	</div>
 	</li>
