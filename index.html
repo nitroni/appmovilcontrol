@@ -56,8 +56,11 @@ scanner.scan(
     function (result) 
 	{
 		//hideAllPages();
-		alert("dato=="+result.text);
-	    if(result.text == "page2")
+		//alert("dato=="+result.text);
+	  document.getElementById("cedula").value=result.text;
+	  document.getElementById("resultado").value="valida";
+	  
+	    /*if(result.text == "page2")
 	    {
 	        document.getElementById('page2').style.visibility = 'visible';
 	        window.location.hash="#page2";
@@ -74,8 +77,8 @@ scanner.scan(
 	    }
 		else
 		{
-            alert("Not a valid QR Code for this application="+result);
-		}
+            alert("Not a valid QR Code for this application=");
+		}*/
     }, 
         function (error) 
 	    {
@@ -125,26 +128,23 @@ function hideAllPages()
 </head>
  
 <body> 
- 
+ <!-- login -->
 <div data-role="page" id="inicio" class="contenido">
  
 	<div data-role="header">
 		<h1>Autenticacion de Usuario</h1>
-	</div>
-    
+	</div>    
 	<div data-role="content">	
 		<form id="formulario">
 		<div class="logo" align="center"></div>
 		<br><br><br>
 	
-  
       			<div class="colortext"> Usuario</div>
       			<input type="text" id="nombredeusuario" name="nombredeusuario">
                 <br>
       			<div class="colortext"> Clave </div>
      			<input type="password" id="clave" name="clave" >
 				<br>
- 
  
       			<input type="submit" value="Login" id="botonLogin" onclick="login();">
       
@@ -153,7 +153,8 @@ function hideAllPages()
 	</div>
 	 
 </div>
- 
+
+ <!-- menu3 control de acceso-->
 <div data-role="page" id="scan" class="contenido">
  
 	<div data-role="header">
@@ -173,9 +174,10 @@ function hideAllPages()
     <input type="text" value="" id="resultado" name="resultado" />	
 	<p>
 	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
-	</div>
-	
+	</div>	
 </div>
+
+<!-- menu2 control de acceso-->
 <div data-role="page" id="menucontrolscan" class="contenido">
  
 	<div data-role="header">
@@ -184,9 +186,30 @@ function hideAllPages()
  
 	<div data-role="content">	
 
-	<button id = "scanButton" onclick="scanQR();">Scannear código QR</button>
-	<button id = "scanButton" onclick="scanQR();">Validar cédula del funcionario</button>
-	<button id = "scanButton" onclick="scanQR();">Usuario anonimo</button>
+	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#scan" class="ui-link-inherit">Scannear código QR</a>
+	</div>
+	</div>
+	</li>
+	
+	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#scan" class="ui-link-inherit">Validar cédula del funcionario</a>
+	</div>
+	</div>
+	</li>
+	
+	<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
+	<div class="ui-btn-inner ui-li">
+	<div class="ui-btn-text">
+	<a href="#scan" class="ui-link-inherit">Usuario anonimo</a>
+	</div>
+	</div>
+	</li>
+	
     <p>  
 	<input type="submit" value="Cerrar sesión" id="cerrar" onclick="closeapp()"/>
 	</div>	
@@ -216,7 +239,7 @@ function hideAllPages()
 	</li>
 
 </div>
-
+<!-- menu1 control de acceso-->
 <div data-role="page" id="menucontrol" class="contenido">
  
 	<div data-role="header">
@@ -224,7 +247,6 @@ function hideAllPages()
 	</div>
  
 	<div data-role="content">	
-
 <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 	<div class="ui-btn-inner ui-li">
 	<div class="ui-btn-text">
@@ -239,24 +261,17 @@ function hideAllPages()
 </div>
 
 
-
-
- 
 <script>
 function closeapp(){
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
     $.mobile.changePage("#inicio");
 }
-$('#formulario').submit(function() { 
-	
-	 
-	// recolecta los valores que inserto el usuario
+$('#formulario').submit(function() { 		 
+	//Se capturan los valores ingresados por el usuario
 	var datosUsuario = $("#nombredeusuario").val()
 	var datosPassword = $("#clave").val()
 	
-  	archivoValidacion = "http://revolucion.mobi/ejemplos/phonegap/envioFormulario/validacion_de_datos.php?jsoncallback=?"
- 
 	if(datosUsuario=="nexos" && datosPassword=="nexos"){
 	  document.getElementById("cedula").value="";
 	  document.getElementById("resultado").value="";
@@ -267,7 +282,17 @@ $('#formulario').submit(function() {
 	}
 	return false;
 })
-	
+function menucontrol(op){
+
+   if(op==1){
+   alert("entro");
+      window.location="#menucontrolscan";	  
+   }
+   if (op==2){
+   }
+   if (op==3){
+   }
+}	
 </script>
  
 </body>
