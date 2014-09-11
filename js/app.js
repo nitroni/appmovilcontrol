@@ -25,3 +25,6 @@ function validarcedula(){
 function egresarusuarios(){
      alert("1 usuario fuera del evento");
 }
+function anonimo(){
+     alert("Usuario anonimo confirmado");
+}
