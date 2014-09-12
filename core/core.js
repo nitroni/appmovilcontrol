@@ -11,7 +11,7 @@ function ValidarLogin() {
           dataType: 'json', // Choosing a JSON datatype		   
           success: function(data) // Variable data contains the data we get from serverside
           {
-			  if(data.CelProveedor>0){
+			  if(data.NomProveedor != null){
 			     $('#coreeventos').empty();
 				 $.mobile.changePage("#home");
                  ListarEventos(data);		
