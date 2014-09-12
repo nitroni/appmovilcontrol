@@ -28,3 +28,22 @@ function egresarusuarios(){
 function anonimo(){
      alert("Usuario anonimo confirmado");
 }
+
+$(document).delegate('#simplestring', 'click', function() {
+  $(this).simpledialog({
+    'mode' : 'string',
+    'prompt' : 'What do you say?',
+    'buttons' : {
+      'OK': {
+        click: function () {
+          $('#dialogoutput').text($('#dialoglink').attr('data-string'));
+        }
+      },
+      'Cancel': {
+        click: function () { },
+        icon: "delete",
+        theme: "c"
+      }
+    }
+  })
+})
