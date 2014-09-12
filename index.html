@@ -3,39 +3,35 @@
 <head>
   <meta charset="UTF-8">
 	<title>AppcIbono</title>
-	<!-- the javascript framework specifically for this application para el diseño responsable -->
 	<link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
 	<!-- PhoneGap JavaScript -->
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<!-- QR Code plugin JavaScript -->
 	<script src="barcodescanner.js"></script>  
     <!-- Se llama la función que realizara el scaneo-->	
-    <script src="js/scannerqr.js"></script> 
+    <script src="js/scannerqr.js"></script>
     <!-- Estilos de la app -->
 	<link rel="stylesheet" href="css/styleapp.css"/>
 	<!-- the javascript specifically for this application -->
 	<script src="jquery.1.9.1.min.js"></script>
-	<script src="jquery.mobile-1.3.1.min.js"></script>
 	<script src="core/core.js"></script>
+	<script src="jquery.mobile-1.3.1.min.js"></script>
 </head>
 <body> 
 <!-- login -->
 <div data-role="page" id="inicio" class="contenido">
-	<div data-role="content">	
-		
+	<div data-role="content">			
 		<div class="logo" align="center"></div>
 		<br><br><br>	
-      			<div class="colortext"> Usuario alons</div>
+      			<div class="colortext"> Usuarioo</div>
       			<input type="text" id="nombredeusuario" name="nombredeusuario">
                 <br>
-      			<div class="colortext"> Clave alonso</div>
+      			<div class="colortext"> Claveo</div>
      			<input type="password" id="clave" name="clave" >
 				<br>
-      			<input type="submit" value="Login" id="botonLogin" onclick="ValidarLogin();">     
-    						
+      			<input type="submit" value="Login" id="botonLogin" onclick="ValidarLogin();">         						
 	</div>	 
 </div>
-
 <!-- menu3 control de acceso-->
 <div data-role="page" id="scan" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
@@ -61,7 +57,6 @@
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
-
 <!-- menu2 control de acceso-->
 <div data-role="page" id="menucontrolscan" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
@@ -88,7 +83,6 @@
 		<div class="ui-btn-inner ui-li">
 		<div class="ui-btn-text">
 		<a href="javascript:anonimo()" class="ui-link-inherit">Usuario anonimo</a>
-		<a href="#" id="dialoglink" data-role="button">Open Dialog</a>
 		</div>
 		</div>
 		</li>	
@@ -104,7 +98,6 @@
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
-
 <!-- home -->
 <div data-role="page" id="home" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
@@ -134,7 +127,6 @@
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
-
 <!-- validar cédula -->
 <div data-role="page" id="ctvalcedula" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
@@ -148,7 +140,6 @@
 		<button id = "vcedu" onclick="validarcedula();">Confirmar c&eacute;dula</button>	
 	</div>	 
 </div>
-
 <!-- Egresar usuarios -->
 <div data-role="page" id="egresar" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>

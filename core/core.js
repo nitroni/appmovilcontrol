@@ -12,7 +12,7 @@ function ValidarLogin() {
 			  if(data.NomProveedor != null){
 			     $('#coreeventos').empty();
 				 $.mobile.changePage("#home");
-                 ListarEventos(data);		
+                 //ListarEventos(data);		
 			  }
 			  else{
 				alert("El usuario o la clave no son validas");
