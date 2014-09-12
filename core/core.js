@@ -1,10 +1,8 @@
-//Core proveedor
-/*function ValidarLogin() {
+function ValidarLogin() {
 	var datosUsuario = $("#nombredeusuario").val();
 	var datosPassword = $("#clave").val();	
 	var NameServicio="";
-	var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';
-	
+	var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
@@ -24,26 +22,6 @@
 		       alert("El usuario o la clave no son validas: error de conexion");
 		  }
       });
-}*/
-
-function ValidarLogin() {
-	var datosUsuario = $("#nombredeusuario").val();
-	var datosPassword = $("#clave").val();		
-    $.get('http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'',              
-     function(data){
-           if (data != "[]") {
-			   var NameServicio="";	   
-			   if(data.NomProveedor != null){
-			     $('#coreeventos').empty();
-				 $.mobile.changePage("#home");
-                 //ListarEventos(data);		
-			  }
-			  else{
-				alert("El usuario o la clave no son validas");
-			  }	   			   			   
-           }
-           return false;
-    });
 }
 function ListarEventos(data){
  var i=0;
