@@ -7,7 +7,7 @@
 	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
-		  
+		  type:"GET",
           dataType: 'json', // Choosing a JSON datatype		   
           success: function(data) // Variable data contains the data we get from serverside
           {
@@ -26,22 +26,17 @@
       });
 }*/
 
-
 function ValidarLogin() {
 	var datosUsuario = $("#nombredeusuario").val();
-	var datosPassword = $("#clave").val();	
-	
+	var datosPassword = $("#clave").val();		
     $.get('http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'',              
      function(data){
            if (data != "[]") {
-			   var ps_nombre="";
-			   var NameServicio="";
-			   var ps_id="";
-			   var i=0;			   
+			   var NameServicio="";	   
 			   if(data.NomProveedor != null){
 			     $('#coreeventos').empty();
 				 $.mobile.changePage("#home");
-                 ListarEventos(data);		
+                 //ListarEventos(data);		
 			  }
 			  else{
 				alert("El usuario o la clave no son validas");
@@ -50,12 +45,8 @@ function ValidarLogin() {
            return false;
     });
 }
-
-
 function ListarEventos(data){
  var i=0;
- //Se limpia el contenido
-	 //Listamos los eventos que tiene esta persona disponibles
 	 while (i < data.Servicios.length){
 		 NameServicio=data.Servicios[i].DesServicio;
 		  if (NameServicio !== null) {
