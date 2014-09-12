@@ -1,18 +1,17 @@
 //Core proveedor
-var url='http://jsonp.jit.su/?url=http%3A%2F%2F181.48.24.156%3A8183%2FServicios%2Fapi%2FProveedor%2FFilter%2F%3Fid%3D';
 function ValidarLogin() {
-
 	var datosUsuario = $("#nombredeusuario").val();
 	var datosPassword = $("#clave").val();	
 	var NameServicio="";
+	var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';
+	
 	$.ajax({ // ajax call starts
-          url: url+datosUsuario+'sx%26clave%3D'+datosPassword+'', // JQuery loads serverside.php 
+          url: url, // JQuery loads serverside.php 
 		  
           dataType: 'json', // Choosing a JSON datatype		   
           success: function(data) // Variable data contains the data we get from serverside
           {
-		  alert("entro consulta");
-			  if(data.NomProveedor !== null){
+			  if(data.NomProveedor != null){
 			     $('#coreeventos').empty();
 				 $.mobile.changePage("#home");
                  ListarEventos(data);		
@@ -22,7 +21,7 @@ function ValidarLogin() {
 			  }	   
           },
 		  error: function(data){
-		       alert("El usuario o la clave no son validas error");
+		       alert("El usuario o la clave no son validas: error de conexion");
 		  }
       });
 }
