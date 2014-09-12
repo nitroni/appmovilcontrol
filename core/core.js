@@ -11,7 +11,8 @@ function ValidarLogin() {
           dataType: 'json', // Choosing a JSON datatype		   
           success: function(data) // Variable data contains the data we get from serverside
           {
-			  if(data.NomProveedor != null){
+		  alert("entro consulta");
+			  if(data.NomProveedor !== null){
 			     $('#coreeventos').empty();
 				 $.mobile.changePage("#home");
                  ListarEventos(data);		
@@ -21,7 +22,7 @@ function ValidarLogin() {
 			  }	   
           },
 		  error: function(data){
-		       alert("El usuario o la clave no son validas");
+		       alert("El usuario o la clave no son validas error");
 		  }
       });
 }
