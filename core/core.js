@@ -1,5 +1,5 @@
 //Core proveedor
-function ValidarLogin() {
+/*function ValidarLogin() {
 	var datosUsuario = $("#nombredeusuario").val();
 	var datosPassword = $("#clave").val();	
 	var NameServicio="";
@@ -24,7 +24,34 @@ function ValidarLogin() {
 		       alert("El usuario o la clave no son validas: error de conexion");
 		  }
       });
+}*/
+
+
+function ValidarLogin() {
+	var datosUsuario = $("#nombredeusuario").val();
+	var datosPassword = $("#clave").val();	
+	
+    $.get('http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'',              
+     function(data){
+           if (data != "[]") {
+			   var ps_nombre="";
+			   var NameServicio="";
+			   var ps_id="";
+			   var i=0;			   
+			   if(data.NomProveedor != null){
+			     $('#coreeventos').empty();
+				 $.mobile.changePage("#home");
+                 ListarEventos(data);		
+			  }
+			  else{
+				alert("El usuario o la clave no son validas");
+			  }	   			   			   
+           }
+           return false;
+    });
 }
+
+
 function ListarEventos(data){
  var i=0;
  //Se limpia el contenido
