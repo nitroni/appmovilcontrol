@@ -12,7 +12,9 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
-          dataType: 'json', // Choosing a JSON datatype		   
+          dataType: 'json', // Choosing a JSON datatype
+          timeout: 5000,	
+          crossDomain: true,		  
           success: function(data) // Variable data contains the data we get from serverside
           {
 		      datosg=data;
@@ -55,7 +57,9 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
-          dataType: 'json', // Choosing a JSON datatype		   
+          dataType: 'json', // Choosing a JSON datatype
+          timeout: 5000,	
+          crossDomain: true,		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
@@ -83,6 +87,8 @@ var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
           dataType: 'json', // Choosing a JSON datatype	
+		  timeout: 5000,	
+          crossDomain: true,
           data: '{"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}',		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
