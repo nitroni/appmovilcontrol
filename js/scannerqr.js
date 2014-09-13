@@ -9,7 +9,7 @@ scanner.scan(
 	  if(resulval=="si"){
 	    resulret="Usuario valido";
 	  }
-	  if(resulval=="si"){
+	  if(resulval=="no"){
 	    resulret="Usuario no valido";
 	  }	
 	  document.getElementById("cedula").value=result.text;

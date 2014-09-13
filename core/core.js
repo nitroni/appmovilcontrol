@@ -42,7 +42,7 @@ function ListarEventos(data){
 		     tiposervicio="r";
 		  }
 		  if (NameServicio !== null) {
-			  $("#coreeventos").append('<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio);">'+NameServicio+'</button></div></div></li><br>');     
+			  $("#coreeventos").append('<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio);" class="ui-btn-text">'+NameServicio+'</button></div></div></li><br>');     
 		  }
 		 i=i+1;
    }
@@ -83,9 +83,10 @@ function Mostrarcontador(datam,codiserv){
 }
 function validarqr(codigoqr) {
 var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+var estado='no';
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
-		  type:"GET",
+		  type:"POST",
           dataType: 'json', // Choosing a JSON datatype	
 		  timeout: 5000,	
           crossDomain: true,
@@ -93,7 +94,51 @@ var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
-              Mostrarcontador(data,cdv);		
+              Mostrarcontador(data,cdv);	
+			  estado='si';
+          },
+		  error: function(data){
+		       alert("Error en la conexion");
+		  }
+      });
+	  return estado;
+}
+function validarcedula(){
+   var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+   var cedula=document.getElementById("cedula").value;
+   $.ajax({ // ajax call starts
+          url: url, // JQuery loads serverside.php 
+		  type:"POST",
+          dataType: 'json', // Choosing a JSON datatype	
+		  timeout: 5000,	
+          crossDomain: true,
+          data: '{"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}',		  
+          success: function(data) // Variable data contains the data we get from serverside
+          {   
+		      $('#datoscontador').empty();
+              Mostrarcontador(data,cdv);	
+			  alert("La cedula "+cedula+" es valida");
+			  document.getElementById("numcedula").value="";
+          },
+		  error: function(data){
+		       alert("Error en la conexion");
+		  }
+      });
+}
+function validaranonimo(){
+   var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+   $.ajax({ // ajax call starts
+          url: url, // JQuery loads serverside.php 
+		  type:"POST",
+          dataType: 'json', // Choosing a JSON datatype	
+		  timeout: 5000,	
+          crossDomain: true,
+          data: '{"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}',		  
+          success: function(data) // Variable data contains the data we get from serverside
+          {   
+		      $('#datoscontador').empty();
+              Mostrarcontador(data,cdv);	
+			  alert("Usuario anonimo contado");
           },
 		  error: function(data){
 		       alert("Error en la conexion");
