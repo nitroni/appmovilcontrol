@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 	<title>AppcIbono</title>
-	<link rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
+	<link media="all" rel="stylesheet" href="css/jquery.mobile.1.3.1.min.css"/>
 	<!-- PhoneGap JavaScript -->
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<!-- QR Code plugin JavaScript -->
@@ -11,7 +11,7 @@
     <!-- Se llama la función que realizara el scaneo-->	
     <script src="js/scannerqr.js"></script>
     <!-- Estilos de la app -->
-	<link rel="stylesheet" href="css/styleapp.css"/>
+	<link media="all" rel="stylesheet" href="css/styleapp.css"/>
 	<!-- the javascript specifically for this application -->
 	<script src="jquery.1.9.1.min.js"></script>
 	<script src="core/core.js"></script>
@@ -35,9 +35,11 @@
 <!-- menu3 control de acceso-->
 <div data-role="page" id="scan" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
-		<h1>Scannear QR</h1><div data-role="navbar">
-	<ul id="datoscontador" name="datoscontador">
-	    
+		<h1>Scannear QR</h1><div data-role="navbar" id="datoscontador" name="datoscontador">
+	<ul>
+	<li><a href="" id="datoscontador1">Entradas: 0</a></li>
+	<li><a href="" id="datoscontador2">Salidas: 0</a></li>
+    <li><a href="" id="datoscontador3">Total evento: 0</a></li>   	
 	</ul>
 </div>
 	</div> 

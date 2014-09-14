@@ -65,7 +65,8 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
           crossDomain: true,		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
-		      $('#datoscontador').empty();
+		      //$('#datoscontador').empty();
+			  $('.cont').empty();
               Mostrarcontador(data,cdv);		
           },
 		  error: function(data){
@@ -73,6 +74,7 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
 		  }
       });
 }
+//muestra el contador de inicio
 function Mostrarcontador(datam,codiserv){
 alert("codigo servicioh="+tiposervice);
 	var i=0;
@@ -80,7 +82,10 @@ alert("codigo servicioh="+tiposervice);
 	while (i < datam.Servicios.length){
 		  if (datam.Servicios[i].CodServicio == codiserv) {
 		     total=(datam.Servicios[i].ConEntradas-datam.Servicios[i].ConSalidas);
-			 $("#datoscontador").append('<li><a href="">Entradas: '+datam.Servicios[i].ConEntradas+'</a></li><li><a href="">Salidas: '+datam.Servicios[i].ConSalidas+'</a></li><li><a href="">Total evento: '+total+'</a></li>'); 
+			 //$("#datoscontador").append('<ul><li><a href="">Entradas: '+datam.Servicios[i].ConEntradas+'</a></li><li><a href="">Salidas: '+datam.Servicios[i].ConSalidas+'</a></li><li><a href="">Total evento: '+total+'</a></li></ul>');
+	          $("#datoscontador1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
+			  $("#datoscontador2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
+			  $("#datoscontador3").text('Total evento: '+total+'');
 		  }
 		 i=i+1;
     }           			  			  				
@@ -114,7 +119,7 @@ var estado='no';
           data: JSON.stringify(datosent),		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
-		      $('#datoscontador').empty();
+		      $('.cont').empty();
               updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 			  estado='si';
           },
@@ -127,11 +132,13 @@ var estado='no';
 }
 //Se actualiza el contador cuando existe una accion del lector qr, validar celdula y usuario anonimo
 function updatecounter(entrada,salida){
-       $numpersonevento=(entrada-salida);
-	   if($numpersonevento<0){
-	      $numpersonevento=0;
+       var numpersonevento=(entrada-salida);
+	   if(numpersonevento<0){
+	      numpersonevento=0;
 	   }
-	   $("#datoscontador").append('<li><a href="">Entradas: '+entrada+'</a></li><li><a href="">Salidas: '+salida+'</a></li><li><a href="">Total evento: '+numpersonevento+'</a></li>');     
+	   $("#datoscontador1").text('Entradas: '+entrada+'');
+	   $("#datoscontador2").text('Salidas: '+salida+'');
+	   $("#datoscontador3").text('Total evento: '+numpersonevento+'');      
 }
 function validarcedula(){
    var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
