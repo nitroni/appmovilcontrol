@@ -5,6 +5,7 @@ var datosUsuario="";
 var datosPassword="";
 var codigoservicio="";
 var datosg;
+var tiposervice="";
 function ValidarLogin() {
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
@@ -49,8 +50,10 @@ function ListarEventos(data){
 }
 function opcionservicio(cdv,tip){   
      cdv.replace(' ','');
+	 alert("op="+cdv);
+	 tiposervice=cdv;
      cargarcontador(cdv,tip);
-     $.mobile.changePage("#menucontrolscan");
+     $.mobile.changePage("#menucontrolscan");	 
 }
 function cargarcontador(cdv,tip) {
 var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';	
@@ -71,6 +74,7 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
       });
 }
 function Mostrarcontador(datam,codiserv){
+alert("codigo servicioh="+tiposervice);
 	var i=0;
 	var total=0;
 	while (i < datam.Servicios.length){
@@ -82,23 +86,41 @@ function Mostrarcontador(datam,codiserv){
     }           			  			  				
 }
 function validarqr(codigoqr) {
+//Se arma el objeto con los parametros a enviar
+var datosent=
+{
+   "NitProveedor":999999999.0,
+   "CedConsumidor":codigoqr,
+   "CodServicio":tiposervice,
+   "FecEntrada":"02/02/2014 09:08:03",
+   "TipRegistro":"E",
+   "Message":null,
+   "ConRegistro":1,
+   "CodProducto":""
+}
+//Se define la url del servicio
 var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
 var estado='no';
 	$.ajax({ // ajax call starts
-          url: url, // JQuery loads serverside.php 
+          url: url, // JQuery loads serverside
 		  type:"POST",
-          dataType: 'json', // Choosing a JSON datatype	
-		  timeout: 5000,	
+		  headers: { 
+				 Accept : "text/plain; charset=utf-8",
+				"Content-Type": "text/plain; charset=utf-8"
+          },
+          dataType: "json",
+		  async: false,
           crossDomain: true,
-          data: '{"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}',		  
+          data: JSON.stringify(datosent),		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
-              Mostrarcontador(data,cdv);	
+              Mostrarcontador(data,tiposervice);	
 			  estado='si';
           },
 		  error: function(data){
-		       alert("Error en la conexion");
+		       alert("Error en la conexion: la cedula no es valida");
+			   estado='no';
 		  }
       });
 	  return estado;
@@ -107,12 +129,16 @@ function validarcedula(){
    var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
    var cedula=document.getElementById("cedula").value;
    $.ajax({ // ajax call starts
-          url: url, // JQuery loads serverside.php 
+          url: url, // JQuery loads serverside
 		  type:"POST",
-          dataType: 'json', // Choosing a JSON datatype	
-		  timeout: 5000,	
+		  headers: { 
+				 Accept : "text/plain; charset=utf-8",
+				"Content-Type": "text/plain; charset=utf-8"
+          },
+          dataType: "json",
+		  async: false,
           crossDomain: true,
-          data: '{"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}',		  
+          data: JSON.stringify(datosent),			  
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
