@@ -115,15 +115,23 @@ var estado='no';
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
-              //Mostrarcontador(data,tiposervice);	
+              updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 			  estado='si';
           },
 		  error: function(data){
-		       alert("Error en la conexion: la cedula no es valida");
+		       //alert("Error en la conexion: la cedula no es valida");
 			   estado='no';
 		  }
       });
 	  return estado;
+}
+//Se actualiza el contador cuando existe una accion del lector qr, validar celdula y usuario anonimo
+function updatecounter(entrada,salida){
+       $numpersonevento=(entrada-salida);
+	   if($numpersonevento<0){
+	      $numpersonevento=0;
+	   }
+	   $("#datoscontador").append('<li><a href="">Entradas: '+entrada+'</a></li><li><a href="">Salidas: '+salida+'</a></li><li><a href="">Total evento: '+numpersonevento+'</a></li>');     
 }
 function validarcedula(){
    var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
