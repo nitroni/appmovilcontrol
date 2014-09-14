@@ -115,7 +115,7 @@ var estado='no';
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      $('#datoscontador').empty();
-              Mostrarcontador(data,tiposervice);	
+              //Mostrarcontador(data,tiposervice);	
 			  estado='si';
           },
 		  error: function(data){
