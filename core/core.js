@@ -321,3 +321,9 @@ function egresarusuarios(){
 function capacidadevento(capev){
     alert("Se llegó al límite de la capacidad del servicio de "+capev);    
 }
+//Se define la función del botón cerrar sesión
+function closeapp(){
+    document.getElementById("nombredeusuario").value="";
+	document.getElementById("clave").value="";
+    $.mobile.changePage("#inicio");
+}

@@ -21,11 +21,3 @@ scanner.scan(
         }
     );
 };
-/* Helper for this example that hides all four pages */
-/*function hideAllPages()
-{
-	document.getElementById('page1').style.visibility = 'hidden';
-	document.getElementById('page2').style.visibility = 'hidden';
-	document.getElementById('page3').style.visibility = 'hidden';		
-	document.getElementById('page4').style.visibility = 'hidden';
-}*/
