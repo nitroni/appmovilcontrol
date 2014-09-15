@@ -146,7 +146,6 @@ var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';
 			  if(conteventotal<0){
 			     conteventotal=0;
 			  }
-			
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 				  estado='si';
@@ -211,7 +210,6 @@ function validarcedula(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			  
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  estado='si';
@@ -258,7 +256,6 @@ function validaranonimo(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			  
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  alert("Usuario anónimo contado");
@@ -304,7 +301,6 @@ function egresarusuarios(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  alert("Usuario descontado");
