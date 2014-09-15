@@ -32,11 +32,11 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
                   ListarEventos(data);		
 			  }
 			  else{
-				alert("El usuario o la clave no son validas");
+				alert("El usuario o la clave no son validos");
 			  }	   
           },
 		  error: function(data){
-		       alert("El usuario o la clave no son validas: error de conexion");
+		       alert("Los campos no pueden estar en blanco");
 		  }
       });
 }
@@ -88,7 +88,7 @@ var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsu
               Mostrarcontador(data,cdv);		
           },
 		  error: function(data){
-		       alert("Error en la conexion");
+		       alert("Error en la conexión");
 		  }
       });
 }
@@ -146,17 +146,16 @@ var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';
 			  if(conteventotal<0){
 			     conteventotal=0;
 			  }
-			  if(conteventotal<=capservicio){
+			
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 				  estado='si';
-			  }
+			  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
 			  }
           },
 		  error: function(data){
-		       //alert("Error en la conexion: la cedula no es valida");
 			   estado='no';
 		  }
       });
@@ -212,12 +211,12 @@ function validarcedula(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			  if(conteventotal<=capservicio){
+			  
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  estado='si';
 				  alert("La cédula es valida");
-			  }
+			  
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }			  
@@ -259,17 +258,17 @@ function validaranonimo(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			  if(conteventotal<=capservicio){
+			  
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  alert("Usuario anónimo contado");
-			  }
+			  
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }	
           },
 		  error: function(data){
-		       alert("Error de conexion al servidor");
+		       alert("Error de conexión al servidor");
 		  }
       });
 }
@@ -305,20 +304,26 @@ function egresarusuarios(){
 			  if(conteventotal<0){
 			      conteventotal=0;
 			  }
-			  if(conteventotal<=capservicio){
+			
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  alert("Usuario descontado");
-			  }
+			  
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }	
           },
 		  error: function(data){
-		       alert("Error de conexion al servidor");
+		       alert("Error de conexión al servidor");
 		  }
       });
 }
 function capacidadevento(capev){
     alert("Se llegó al límite de la capacidad del servicio de "+capev);    
+}
+//Se define la función del botón cerrar sesión
+function closeapp(){
+    document.getElementById("nombredeusuario").value="";
+	document.getElementById("clave").value="";
+    $.mobile.changePage("#inicio");
 }
