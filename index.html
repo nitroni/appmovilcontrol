@@ -60,7 +60,13 @@
 <!-- menu2 control de acceso-->
 <div data-role="page" id="menucontrolscan" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
-		<h1>Control de acceso</h1>
+		<h1>Control de acceso</h1><div data-role="navbar" id="datconuno" name="datconuno">
+	<ul>
+	<li><a href="" id="datconuno1">Entradas: 0</a></li>
+	<li><a href="" id="datconuno2">Salidas: 0</a></li>
+    <li><a href="" id="datconuno3">Total evento: 0</a></li>   	
+	</ul>
+</div>
 	</div>
 	<div data-role="content">	
 		<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
@@ -81,8 +87,8 @@
 		<br>
 		<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
 		<div class="ui-btn-inner ui-li">
-		<div class="ui-btn-text">
-		<a href="javascript:anonimo()" class="ui-link-inherit">Usuario anonimo</a>
+		<div class="ui-btn-text" onClick="validaranonimo()">
+		<a href="" class="ui-link-inherit">Usuario anonimo</a>
 		</div>
 		</div>
 		</li>	
@@ -104,8 +110,8 @@
 		<h1>Bienvenido</h1>
 	</div>
     <br><br>
-    <div data-role="content">
-	<div id="coreeventos" name ="coreenventos"></div>
+    <div data-role="content" id="coreeventos" name ="coreenventos">
+	
 	</div>
 
 </div>
@@ -143,11 +149,11 @@
 <!-- Egresar usuarios -->
 <div data-role="page" id="egresar" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
-		<h1>Egresar usuarios</h1><div data-role="navbar">
+		<h1>Egresar usuarios</h1><div data-role="navbar" id="contegresar" name="contegresar">
 	<ul>
-		<li><a href="">Entradas: 0</a></li>
-		<li><a href="">Salidas: 0</a></li>
-		<li><a href="">Total evento: 0</a></li>
+		<li><a href="" id="contegresar1">Entradas: 0</a></li>
+		<li><a href="" id="contegresar2">Salidas: 0</a></li>
+		<li><a href="" id="contegresar3">Total evento: 0</a></li>
 	</ul>
 </div>
 	</div> 
@@ -155,6 +161,18 @@
 		<button id = "scanButton" onclick="egresarusuarios();">Egresar usuario</button>
 		<p><p>
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
+	</div>	
+</div>
+<!-- Detalle-->
+<div data-role="page" id="detalle" class="contenido">
+	<div data-role="header"><div class="logobar" align="center"></div>
+		<h1>Detalle del servicio</h1>
+	</div> 
+	<div data-role="content">	
+	<br>
+		<p class="colortext" id="detalle1">Fecha de inicio del servicio: </p><br>
+		<p class="colortext" id="detalle2">Fecha de finalización del servicio: </p><br>
+		<p class="colortext" id="detalle3">Capacidad: </p>
 	</div>	
 </div>
 </body>
