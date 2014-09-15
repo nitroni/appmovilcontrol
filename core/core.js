@@ -233,7 +233,7 @@ function validaranonimo(){
     var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
-	   "CedConsumidor":713999,
+	   "CedConsumidor":0,
 	   "CodServicio":tiposervice,
 	   "FecEntrada":fechaactual,
 	   "TipRegistro":"E",
@@ -279,7 +279,7 @@ function egresarusuarios(){
     var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
-	   "CedConsumidor":713999,
+	   "CedConsumidor":0,
 	   "CodServicio":tiposervice,
 	   "FecEntrada":fechaactual,
 	   "TipRegistro":"S",
