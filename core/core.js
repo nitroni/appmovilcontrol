@@ -13,32 +13,40 @@ var detfechafinserv="";
 var detcapaserv="";
 var capservicio="";
 var conteventotal="";
+
+var sitePath = 'http://181.48.24.156:8183/Servicios/api';
+
 function ValidarLogin() {
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
-var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';		
-	$.ajax({ // ajax call starts
-          url: url, // JQuery loads serverside.php 
-		  type:"GET",
-          dataType: 'json', // Choosing a JSON datatype
-          timeout: 5000,	
-          crossDomain: true,		  
-          success: function(data) // Variable data contains the data we get from serverside
-          {
-		      datosg=data;
-			  if(data.NomProveedor != null){
-			     $('#coreeventos').empty();
-				 $.mobile.changePage("#home");
-                  ListarEventos(data);		
+if(datosUsuario!="" && datosPassword!=""){
+	var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';		
+		$.ajax({ // ajax call starts
+			  url: url, // JQuery loads serverside.php 
+			  type:"GET",
+			  dataType: 'json', // Choosing a JSON datatype
+			  timeout: 5000,	
+			  crossDomain: true,		  
+			  success: function(data) // Variable data contains the data we get from serverside
+			  {
+				  datosg=data;
+				  if(data.NomProveedor != null){
+					 $('#coreeventos').empty();
+					 $.mobile.changePage("#home");
+					  ListarEventos(data);		
+				  }
+				  else{
+					alert("El usuario o la clave no son validos");
+				  }	   
+			  },
+			  error: function(data){
+				   alert("Error de conexión");
 			  }
-			  else{
-				alert("El usuario o la clave no son validos");
-			  }	   
-          },
-		  error: function(data){
-		       alert("Los campos no pueden estar en blanco");
-		  }
-      });
+		  });
+	  }
+	  else{
+	      alert("Los campos no pueden estar en blanco");
+	  }
 }
 function ListarEventos(data){
  var i=0;
@@ -74,7 +82,7 @@ function detalleservicio(fechainicio,fechafin,capacidad){
 	 $.mobile.changePage("#detalle");
 }
 function cargarcontador(cdv,tip) {
-var url='http://181.48.24.156:8183/Servicios/api/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';	
+var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
@@ -109,13 +117,19 @@ function Mostrarcontador(datam,codiserv){
               $("#contegresar1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
 	          $("#contegresar2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
 	          $("#contegresar3").text('Total evento: '+total+''); 	 
+			  	 
 		  }
 		 i=i+1;
     }           			  			  				
 }
 function validarqr(codigoqr) {
+if(codigoqr=="" || codigoqr=='0'){
+   alert("El código QR no es válido");
+   return false;
+}
 var fecha = new Date();
-var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+//var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+var fechaactual = GetCurrentDate(fecha);
 var datosent=
 {
    "NitProveedor":nitproveedor,
@@ -128,7 +142,7 @@ var datosent=
    "CodProducto":""
 }
 //Se define la url del servicio
-var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+var url= sitePath + '/Registro/Add';	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -178,8 +192,14 @@ function updatecounter(entrada,salida){
 }
 function validarcedula(){
     var cedula=document.getElementById("numcedula").value;
+	if(cedula==""){
+	   alert("Por favor digite la cédula.");
+	return false;
+	
+	}
 	var fecha = new Date();
-    var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+	var fechaactual= GetCurrentDate(fecha);
 	//Se arma el objeto con los parametros a enviar
 	var datosentc=
 	{
@@ -192,7 +212,7 @@ function validarcedula(){
 	   "ConRegistro":1,
 	   "CodProducto":""
 	}
-   var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	  
+   var url= sitePath + '/api/Registro/Add';	  
    $.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -226,8 +246,9 @@ function validarcedula(){
 }
 function validaranonimo(){
     var fecha = new Date();
-    var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-    var datosenta=
+    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+    var fechaactual = GetCurrentDate(fecha);
+	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
 	   "CedConsumidor":0,
@@ -238,7 +259,7 @@ function validaranonimo(){
 	   "ConRegistro":1,
 	   "CodProducto":""
 	}
-   var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+   var url= sitePath + '/Registro/Add';	
    $.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -271,8 +292,9 @@ function validaranonimo(){
 }
 function egresarusuarios(){
     var fecha = new Date();
-    var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-    var datosenta=
+    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+    var fechaactual = GetCurrentDate(fecha);
+	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
 	   "CedConsumidor":0,
@@ -283,7 +305,7 @@ function egresarusuarios(){
 	   "ConRegistro":1,
 	   "CodProducto":""
 	}
-   var url='http://181.48.24.156:8183/Servicios/api/Registro/Add';	
+   var url= sitePath + '/Registro/Add';	
    $.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -322,4 +344,17 @@ function closeapp(){
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
     $.mobile.changePage("#inicio");
+}
+function Trestaurante(op){
+     if(op==1){
+        $.mobile.changePage('#home');
+		}
+		if(op==2){
+		   $.mobile.changePage('#menucontrolscan');
+		}
+}
+
+function GetCurrentDate(fecha){
+	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+	return currentDate;
 }

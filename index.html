@@ -24,7 +24,8 @@
       			<div class="colortext"> Clave </div>
      			<input type="password" id="clave" name="clave" >
 				<br>
-      			<input type="submit" value="Login" id="botonLogin" onclick="ValidarLogin();">         						
+      			<input type="submit" value="Login" id="botonLogin" onclick="ValidarLogin();">
+				<input type="submit" value="Login prueba" id="botonLogin" onclick="Trestaurante(1);">
 	</div>	 
 </div>
 <!-- menu3 control de acceso-->
@@ -49,6 +50,14 @@
 		<p>
 		<input type="text" value="" id="resultado" name="resultado" />	
 		<p>
+		<div data-role="collapsible">
+         <h4>Reservas</h4>
+              <p></p>
+			  <p id="1">Plato 1</p>
+			  <p id="2">1 Reserva</p>
+			  <p id="3">0 Consumo</p>
+         </div>
+        <p>
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
 	</div>	
 </div>
@@ -106,6 +115,9 @@
 	</div>
     <br><br>
     <div data-role="content" id="coreeventos" name ="coreenventos">	
+	<!-- Datos prueba quitar despues-->
+	     <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="Trestaurante(2);" class="ui-btn-text">control de acceso</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" >Detalle</button></div></li><br>
+		 <li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="Trestaurante(2);" class="ui-btn-text">restaurante</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','01/02/2014','20');" >Detalle</button></div></li><br>
 	</div>
 </div>
 <!-- menu1 control de acceso-->
@@ -133,7 +145,7 @@
 	</div>    
 	<div data-role="content">	
 		<div class="colortext"> C&eacute;dula</div>
-		<input type="number" id="numcedula" name="numcedula" size="17" maxlength="17">
+		<input type="number" id="numcedula" name="numcedula" onKeyDown="if(this.value.length==17) return false;">
 		<br>
 		<br>
 		<button id = "vcedu" onclick="validarcedula();">Confirmar c&eacute;dula</button>	

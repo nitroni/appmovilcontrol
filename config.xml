@@ -24,6 +24,10 @@
 <gap:plugin name="org.apache.cordova.media" />
 <gap:plugin name="org.apache.cordova.network-information" />
 <gap:plugin name="org.apache.cordova.splashscreen" />
+
+<gap:platform name="ios" />
+<gap:platform name="android" />
+
 <!--<gap:plugin name="org.apache.cordova.vibration" />-->
 <!-- Third party plugins -->
 <!-- note that third party plugins will require an associated .js file to be included in index.html -->
