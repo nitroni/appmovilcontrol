@@ -20,7 +20,7 @@ function ValidarLogin() {
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
 if(datosUsuario!="" && datosPassword!=""){
-	var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';		
+	var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'&clave='+datosPassword+'';		
 		$.ajax({ // ajax call starts
 			  url: url, // JQuery loads serverside.php 
 			  type:"GET",
@@ -82,7 +82,7 @@ function detalleservicio(fechainicio,fechafin,capacidad){
 	 $.mobile.changePage("#detalle");
 }
 function cargarcontador(cdv,tip) {
-var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'sx&clave='+datosPassword+'';	
+var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'&clave='+datosPassword+'';	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside.php 
 		  type:"GET",
