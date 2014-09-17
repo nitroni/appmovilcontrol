@@ -1,7 +1,8 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id = "ie.dkit.derek.qr_code">
-
+        id = "com.nexosapp.controlacceso"
+        version = "1.0.0">
+		
 <name>Control de acceso</name>
 <description>Control de acceso</description>
 <author email="nitroni45@gmail.com" href="http://www.nitroni.com">Control de acceso</author>
