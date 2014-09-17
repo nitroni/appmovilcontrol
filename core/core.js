@@ -197,7 +197,6 @@ function validarcedula(){
 	return false;
 	
 	}
-	alert("cedula="+cedula+" nit provedor="+nitproveedor);
 	var fecha = new Date();
     //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	var fechaactual= GetCurrentDate(fecha);
