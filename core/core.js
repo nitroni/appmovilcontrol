@@ -197,6 +197,7 @@ function validarcedula(){
 	return false;
 	
 	}
+	alert("cedula="+cedula+" nit provedor="+nitproveedor);
 	var fecha = new Date();
     //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	var fechaactual= GetCurrentDate(fecha);
@@ -212,7 +213,8 @@ function validarcedula(){
 	   "ConRegistro":1,
 	   "CodProducto":""
 	}
-   var url= sitePath + '/api/Registro/Add';	  
+		
+   var url= sitePath + '/Registro/Add';	  
    $.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -240,7 +242,7 @@ function validarcedula(){
 			  }			  
           },
 		  error: function(data){
-			  alert("La cédula "+cedula+" no es valida");
+			  alert("La cédula "+cedula+" no es valida" + data);
 		  }
       });
 }
