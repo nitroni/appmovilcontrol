@@ -6,14 +6,20 @@ scanner.scan(
     function (result) 
 	{
 	  resulval=validarqr(result.text);
-	  if(resulval=="si"){
-	    resulret="Usuario valido";
+
+	   alert("resultadoretornado :"+resulval);
+	  if(resulval!="no"){	  
+	     resulret="Usuario valido";
+		 alert("Su consumo para el día de hoy es :"+resulval.DesProducto);
 	  }
+	  
 	  if(resulval=="no"){
 	    resulret="Usuario no valido";
 	  }	
+	  
 	  document.getElementById("cedula").value=result.text;
 	  document.getElementById("resultado").value=resulret;
+	  
     }, 
         function (error) 
 	    {

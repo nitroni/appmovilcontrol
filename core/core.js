@@ -6,15 +6,18 @@ var datosPassword="";
 var codigoservicio="";
 var datosg;
 var tiposervice="";
-var estado='no';
+var estado;
 var nitproveedor="";
 var detfechainiserv="";
 var detfechafinserv="";
 var detcapaserv="";
 var capservicio="";
 var conteventotal="";
+var fechaconsumoini="";
+var fechaconsumofin="";
+var IndAlerta="";
 
-var sitePath = 'http://181.48.24.156:8183/Servicios/api';
+var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
 datosUsuario = $("#nombredeusuario").val();
@@ -56,22 +59,28 @@ function ListarEventos(data){
 		 nitproveedor=data.Servicios[i].NitProveedor;
 		 detfechainiserv=data.Servicios[i].RanIniDisServicio;
          detfechafinserv=data.Servicios[i].RanFinDisServicio;
+		 fechaconsumoini=data.Servicios[i].RanIniDisConsumo;
+         fechaconsumofin=data.Servicios[i].RanFinDisConsumo;		
          detcapaserv=data.Servicios[i].CapServicio;
+         IndAlerta=	data.Servicios[i].IndAlerta;
+		 
 		 tiposervicio="c";
+		 
 		  if(NameServicio=="Restaurante"){
 		     tiposervicio="r";
 		  }
 		  if (NameServicio !== null) {
-			  $("#coreeventos").append('<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+');" class="ui-btn-text">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" >Detalle</button></div></li><br>');     
+			  $("#coreeventos").append('<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+');" class="ui-btn-text">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" >Detalle</button></div></li><br>');     
 		  }
 		 i=i+1;
    }
 }
-function opcionservicio(cdv,tip,nitpro,cap){   
+function opcionservicio(cdv,tip,nitpro,cap,valservicio){   
      cdv.replace(' ','');
 	 tiposervice=cdv;
 	 nitproveedor=nitpro;
 	 capservicio=cap;
+	 IndAlerta=valservicio;
      cargarcontador(cdv,tip);
      $.mobile.changePage("#menucontrolscan");	 
 }
@@ -117,32 +126,31 @@ function Mostrarcontador(datam,codiserv){
               $("#contegresar1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
 	          $("#contegresar2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
 	          $("#contegresar3").text('Total evento: '+total+''); 	 
-			  	 
 		  }
-		 i=i+1;
+		  i=i+1;
     }           			  			  				
 }
 function validarqr(codigoqr) {
-if(codigoqr=="" || codigoqr=='0'){
-   alert("El código QR no es válido");
-   return false;
-}
-var fecha = new Date();
-//var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-var fechaactual = GetCurrentDate(fecha);
-var datosent=
-{
-   "NitProveedor":nitproveedor,
-   "CedConsumidor":codigoqr,
-   "CodServicio":tiposervice,
-   "FecEntrada":fechaactual,
-   "TipRegistro":"E",
-   "Message":null,
-   "ConRegistro":1,
-   "CodProducto":""
-}
-//Se define la url del servicio
-var url= sitePath + '/Registro/Add';	
+	if(codigoqr=="" || codigoqr=='0'){
+	   alert("El código QR no es válido");
+	   return false;
+	}
+	var fecha = new Date();
+	var fechaactual = GetCurrentDate(fecha);
+	var datosent=
+	{
+	   "NitProveedor":nitproveedor,
+	   "CedConsumidor":codigoqr,
+	   "CodServicio":tiposervice,
+	   "FecEntrada":fechaactual,
+	   "TipRegistro":"E",
+	   "Message":null,
+	   "ConRegistro":1,
+	   "CodProducto":""
+	}
+	var estado;
+	//Se define la url del servicio
+	var url= sitePath + '/Registro/Add';	
 	$.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
 		  type:"POST",
@@ -156,14 +164,12 @@ var url= sitePath + '/Registro/Add';
           data: JSON.stringify(datosent),		  
           success: function(data) // Variable data contains the data we get from serverside
           {   
-		      conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
-			  if(conteventotal<0){
-			     conteventotal=0;
-			  }
+		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 				  estado='si';
-			  
+			      estado=RetornarEstado(data,estado);
+				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
 			  }
@@ -174,12 +180,37 @@ var url= sitePath + '/Registro/Add';
       });
 	  return estado;
 }
+function RetornarEstado(datae,estado){      
+		var estadodatos;
+		if(IndAlerta==1 && datae.Reservas!=null){		
+			estadodatos=
+			{
+			   "Estado":estado,
+			   "CedConsumidor":datae.Reservas[0].CedConsumidor,
+			   "FecReserva":datae.Reservas[0].FecReserva,
+			   "CodProducto":datae.Reservas[0].CodProducto,
+			   "NumReservas":datae.Reservas[0].NumReservas,
+			   "NumConsumos":datae.Reservas[0].NumConsumos,
+			   "DesProducto":datae.Reservas[0].DesProducto
+			}
+		}
+		else{
+		     estadodatos=
+			{
+			   "Estado":estado,
+			   "CedConsumidor":0,
+			   "FecReserva":0,
+			   "CodProducto":0,
+			   "NumReservas":0,
+			   "NumConsumos":0,
+			   "DesProducto":0
+			}
+		}
+		return estadodatos;
+}
 //Se actualiza el contador cuando existe una accion del lector qr, validar celdula y usuario anonimo
 function updatecounter(entrada,salida){
        var numpersonevento=(entrada-salida);
-	   if(numpersonevento<0){
-	      numpersonevento=0;
-	   }
 	   $("#datoscontador1").text('Entradas: '+entrada+'');
 	   $("#datoscontador2").text('Salidas: '+salida+'');
 	   $("#datoscontador3").text('Total evento: '+numpersonevento+''); 
@@ -194,11 +225,9 @@ function validarcedula(){
     var cedula=document.getElementById("numcedula").value;
 	if(cedula==""){
 	   alert("Por favor digite la cédula.");
-	return false;
-	
+	   return false;	
 	}
 	var fecha = new Date();
-    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	var fechaactual= GetCurrentDate(fecha);
 	//Se arma el objeto con los parametros a enviar
 	var datosentc=
@@ -227,15 +256,21 @@ function validarcedula(){
           data: JSON.stringify(datosentc),			  
           success: function(data) // Variable data contains the data we get from serverside
           {   
-		      conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
-			  if(conteventotal<0){
-			      conteventotal=0;
-			  }
+		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
-				  estado='si';
-				  alert("La cédula es valida");
-			  
+				  //Se valida si el usuario tiene una reserva
+				  estado="si";
+				  estado=RetornarEstado(data,estado);		  				  
+				  if(IndAlerta==1 && data.Reservas!=null){ 
+				      if(data.Reservas!=null){
+					      alert("Su consumo para el día de hoy es :"+estado.DesProducto);
+						  document.getElementById("numcedula").value="";
+					    }  
+					  else {
+					       alert("No existe ningún producto para ser consumido para el día de hoy");
+					    } 
+				    } 	
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }			  
@@ -247,7 +282,6 @@ function validarcedula(){
 }
 function validaranonimo(){
     var fecha = new Date();
-    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
     var fechaactual = GetCurrentDate(fecha);
 	var datosenta=
 	{
@@ -293,7 +327,6 @@ function validaranonimo(){
 }
 function egresarusuarios(){
     var fecha = new Date();
-    //var fechaactual=(fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
     var fechaactual = GetCurrentDate(fecha);
 	var datosenta=
 	{
@@ -321,9 +354,6 @@ function egresarusuarios(){
           success: function(data) // Variable data contains the data we get from serverside
           {   
 		      conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
-			  if(conteventotal<0){
-			      conteventotal=0;
-			  }
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  alert("Usuario descontado");
@@ -354,7 +384,6 @@ function Trestaurante(op){
 		   $.mobile.changePage('#menucontrolscan');
 		}
 }
-
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
