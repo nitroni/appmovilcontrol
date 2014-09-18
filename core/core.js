@@ -167,6 +167,8 @@ function validarqr(codigoqr) {
 		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
+				  
+				  alert("Cedula validad entro 1");
 				  estadores='si';
 			      estado=RetornarEstado(data,estadores);
 				  								  
@@ -175,6 +177,7 @@ function validarqr(codigoqr) {
 			  }
           },
 		  error: function(data){
+		  alert("entro por error");
 			   estadores='no';
 			   estado=RetornarEstado(data,estadores);
 		  }
@@ -183,7 +186,8 @@ function validarqr(codigoqr) {
 }
 function RetornarEstado(datae,estado){      
 		var estadodatos;
-		if(IndAlerta==1 && datae.Reservas!=null){		
+		if(IndAlerta==1 && datae.Reservas!=null){	
+        alert("tiene datos");		
 			estadodatos=
 			{
 			   "Estado":estado,
@@ -196,6 +200,7 @@ function RetornarEstado(datae,estado){
 			}
 		}
 		else{
+		    alert("no tiene datos");	
 		     estadodatos=
 			{
 			   "Estado":estado,
@@ -207,6 +212,7 @@ function RetornarEstado(datae,estado){
 			   "DesProducto":0
 			}
 		}
+
 		return estadodatos;
 }
 //Se actualiza el contador cuando existe una accion del lector qr, validar celdula y usuario anonimo

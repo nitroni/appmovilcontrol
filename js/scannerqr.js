@@ -10,11 +10,11 @@ scanner.scan(
 	   alert("resultadoretornado :"+resulval);
 	  if(resulval.Estado=="si"){	  
 	     resulret="Usuario valido";
-		 alert("Su consumo para el día de hoy es :"+resulval.DesProducto);
+		 alert("Su consumo para el día de hoy es :");
 	  }
 	  
 	  if(resulval.Estado=="no"){
-	    resulret="Usuario no valido";
+	     resulret="Usuario no valido";
 	  }	
 	  
 	  document.getElementById("cedula").value=result.text;
