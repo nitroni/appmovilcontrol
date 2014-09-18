@@ -137,6 +137,7 @@ function validarqr(codigoqr) {
 	}
 	var fecha = new Date();
 	var fechaactual = GetCurrentDate(fecha);
+    var estadores;
 	var datosent=
 	{
 	   "NitProveedor":nitproveedor,
@@ -148,7 +149,6 @@ function validarqr(codigoqr) {
 	   "ConRegistro":1,
 	   "CodProducto":""
 	}
-	var estado;
 	//Se define la url del servicio
 	var url= sitePath + '/Registro/Add';	
 	$.ajax({ // ajax call starts
@@ -167,16 +167,16 @@ function validarqr(codigoqr) {
 		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
-				  estado='si';
-			      estado=RetornarEstado(data,estado);
+				  estadores='si';
+			      estado=RetornarEstado(data,estadores);
 				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
 			  }
           },
 		  error: function(data){
-			   estado='no';
-			   estado=RetornarEstado(data,estado);
+			   estadores='no';
+			   estado=RetornarEstado(data,estadores);
 		  }
       });
 	  return estado;
