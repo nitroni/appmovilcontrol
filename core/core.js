@@ -169,7 +169,7 @@ function validarqr(codigoqr) {
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 				  
-				  alert("Cedula validad entro 1");
+				  alert("Cedula validad entro 1="+IndAlerta);
 				  estado='si';
 				  
 				  if(IndAlerta==1){
@@ -184,7 +184,7 @@ function validarqr(codigoqr) {
 				  if(IndAlerta==0){
 				     tienereservas=1;
 				  }
-     		      ImprimirResultSnner(estado,codigoqr,tipost);
+     		     ImprimirResultSnner(estado,codigoqr,tienereservas);
 				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
@@ -196,7 +196,6 @@ function validarqr(codigoqr) {
 				 if(IndAlerta==0){
 				     tienereservas=1;
 				  }
-				  
 			      estado='no';
 			      ImprimirResultSnner(estado,codigoqr,tienereservas);
 				  
@@ -250,6 +249,7 @@ function updatecounter(entrada,salida){
 }
 function validarcedula(){
     var cedula=document.getElementById("numcedula").value;
+	var tienereservas;
 	if(cedula==""){
 	   alert("Por favor digite la cédula.");
 	   return false;	
@@ -298,6 +298,7 @@ function validarcedula(){
 					       alert("No existe ningún producto para ser consumido para el día de hoy");
 					    } 
 				    } 	
+						
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }			  
@@ -416,7 +417,7 @@ function GetCurrentDate(fecha){
 	return currentDate;
 }
 function ImprimirResultSnner(estado,text,tipost){
-       
+       alert("datos llegaron="+estado+","+text+","+tipost);
 	   if(estado=="si" && tipost==1){
 		   resulret="Usuario valido";
 		}
