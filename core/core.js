@@ -138,6 +138,7 @@ function validarqr(codigoqr) {
 	var fecha = new Date();
 	var fechaactual = GetCurrentDate(fecha);
     var estadores;
+	var tienereservas;
 	var datosent=
 	{
 	   "NitProveedor":nitproveedor,
@@ -169,8 +170,21 @@ function validarqr(codigoqr) {
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
 				  
 				  alert("Cedula validad entro 1");
-				  estadores='si';
-			      estado=RetornarEstado(data,estadores);
+				  estado='si';
+				  
+				  if(IndAlerta==1){
+					  if(data.Reservas!=null){
+						 tienereservas=2;
+					  }
+					  else
+					  {
+					    tienereservas=3;
+					  }
+				  }
+				  if(IndAlerta==0){
+				     tienereservas=1;
+				  }
+     		      ImprimirResultSnner(estado,codigoqr,tipost);
 				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
@@ -178,8 +192,14 @@ function validarqr(codigoqr) {
           },
 		  error: function(data){
 		  alert("entro por error");
-			   estadores='no';
-			   estado=RetornarEstado(data,estadores);
+		        
+				 if(IndAlerta==0){
+				     tienereservas=1;
+				  }
+				  
+			      estado='no';
+			      ImprimirResultSnner(estado,codigoqr,tienereservas);
+				  
 		  }
       });
 	  return estado;
@@ -394,4 +414,24 @@ function Trestaurante(op){
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
+}
+function ImprimirResultSnner(estado,text,tipost){
+       
+	   if(estado=="si" && tipost==1){
+		   resulret="Usuario valido";
+		}
+		if(estado=="si" && tipost==2){
+		   resulret="Usuario valido";
+		}
+        if(estado=="no" tipost==1){
+	       resulret="Usuario no valido";
+	    }			
+        document.getElementById("cedula").value=text;
+	    document.getElementById("resultado").value=resulret;
+		if(estado=="si" && tipost==2){
+		   alert("Su consumo para el día de hoy es");
+		}
+		if(estado=="si" && tipost==3){
+		   alert("Usted no tiene nada por consumir");
+		}
 }
