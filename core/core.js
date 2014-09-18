@@ -423,7 +423,7 @@ function ImprimirResultSnner(estado,text,tipost){
 		if(estado=="si" && tipost==2){
 		   resulret="Usuario valido";
 		}
-        if(estado=="no" tipost==1){
+        if(estado=="no" && tipost==1){
 	       resulret="Usuario no valido";
 	    }			
         document.getElementById("cedula").value=text;
