@@ -176,6 +176,7 @@ function validarqr(codigoqr) {
           },
 		  error: function(data){
 			   estado='no';
+			   estado=RetornarEstado(data,estado);
 		  }
       });
 	  return estado;

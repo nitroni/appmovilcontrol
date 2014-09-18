@@ -8,12 +8,12 @@ scanner.scan(
 	  resulval=validarqr(result.text);
 
 	   alert("resultadoretornado :"+resulval);
-	  if(resulval!="no"){	  
+	  if(resulval.Estado=="si"){	  
 	     resulret="Usuario valido";
 		 alert("Su consumo para el día de hoy es :"+resulval.DesProducto);
 	  }
 	  
-	  if(resulval=="no"){
+	  if(resulval.Estado=="no"){
 	    resulret="Usuario no valido";
 	  }	
 	  
