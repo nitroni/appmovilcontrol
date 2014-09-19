@@ -138,9 +138,41 @@ function validarqr(codigoqr) {
 	var fecha = new Date();
 	var fechaactual = GetCurrentDate(fecha);
 	
+	if(IndAlerta==1){
+		//Validar la fecha de consumo inicial
+		//Fecha actual
+		var fechacompactual=fecha.getFullYear() + '' + ("0" + (fecha.getMonth() + 1)).slice(-2) + '' + ("0" + (fecha.getDate())).slice(-2);
+		//Hora actual
+		var horacompactual=fecha.getHours()+''+("0" + (fecha.getMinutes())).slice(-2)+''+("0" + (fecha.getSeconds())).slice(-2);	
+		//Extraer hora de inicio
+		var horacompainicon=ExtrearHora(fechaconsumoini);
+		//Extraer fecha de inicio	
+		var fechacompainicon=ExtraerFecha(fechaconsumoini);
+		//Extraer hora de finalización
+		var horacompafincon=ExtrearHora(fechaconsumofin);
+		//Extraer fecha de finalización
+		var fechacompafincon=ExtraerFecha(fechaconsumofin);
+		//Comparar el rango de fechas
+		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
+		//Comparar el rago de horas
+		var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		
+		if(resulfechas==true){
+		   if(resulhoras==true){
+		   }
+			if(resulhoras==false){
+			  alert("La hora habilitada para este servicio ha finalizado");
+			  return false;
+		   }
+		}
+		if(resulfechas==false){
+		   alert("La fecha del servicio ha finalizado");
+		}
+    }	
     var estadores;
 	var tienereservas;
 	var consumo="";
+	var vconsumoqr;
 	var datosent=
 	{
 	   "NitProveedor":nitproveedor,
@@ -170,12 +202,10 @@ function validarqr(codigoqr) {
 		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);	
-				  
-				  alert("Cedula validad entro 1="+IndAlerta);
-				  estado='si';
-				  
+				  estado='si';  
 				  if(IndAlerta==1){
 					  if(data.Reservas!=null){
+					     vconsumoqr=(data.Reservas[0].NumReservas-data.Reservas[0].NumConsumos);
 						 tienereservas=2;
 						 consumo=data.Reservas[0].DesProducto;
 					  }
@@ -183,34 +213,32 @@ function validarqr(codigoqr) {
 					  {
 					    consumo="";
 					    tienereservas=3;
+						vconsumoqr=0;
 					  }
 				  }
 				  if(IndAlerta==0){
 				     tienereservas=1;
 				  }
-     		     ImprimirResultSnner(estado,codigoqr,tienereservas,consumo);
+     		     ImprimirResultSnner(estado,codigoqr,tienereservas,consumo,vconsumoqr);
 				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
 			  }
           },
 		  error: function(data){
-		  alert("entro por error");
-		        
 				 if(IndAlerta==0){
 				     tienereservas=1;
 				  }
 			      estado='no';
-			      ImprimirResultSnner(estado,codigoqr,tienereservas);
-				  
+				  vconsumoqr=0;
+			      ImprimirResultSnner(estado,codigoqr,tienereservas,vconsumoqr);
 		  }
       });
 	  return estado;
 }
 function RetornarEstado(datae,estado){      
 		var estadodatos;
-		if(IndAlerta==1 && datae.Reservas!=null){	
-        alert("tiene datos");		
+		if(IndAlerta==1 && datae.Reservas!=null){			
 			estadodatos=
 			{
 			   "Estado":estado,
@@ -222,8 +250,7 @@ function RetornarEstado(datae,estado){
 			   "DesProducto":datae.Reservas[0].DesProducto
 			}
 		}
-		else{
-		    alert("no tiene datos");	
+		else{	
 		     estadodatos=
 			{
 			   "Estado":estado,
@@ -235,7 +262,6 @@ function RetornarEstado(datae,estado){
 			   "DesProducto":0
 			}
 		}
-
 		return estadodatos;
 }
 //Se actualiza el contador cuando existe una accion del lector qr, validar celdula y usuario anonimo
@@ -261,46 +287,37 @@ function validarcedula(){
 	var fecha = new Date();
 	var fechaactual= GetCurrentDate(fecha);
 	
-	alert("fecha actual="+fechaactual);
-	alert("fecha de consumo ini ="+fechaconsumoini);
-	alert("fecha de consumo final ="+ fechaconsumofin);
-	
-	alert("hora="+fecha.getHours());
-	alert("minutos ="+fecha.getMinutes());
-	alert("segundos ="+ fecha.getSeconds());
-	
-	var horacompactual=fecha.getHours()+''+fecha.getMinutes()+''+fecha.getSeconds();
-	var horacompainicon=ExtrearHora(fechaconsumoini);
-	var resultadocomp=ComparFechas(horacompactual,dato2)
-    
-	
-	
-	
-	alert("horaactual="+horacompactual+ "horaconsumo="+horacompainicon);
+	if(IndAlerta==1){
+		//Validar la fecha de consumo inicial
+		//Fecha actual
+		var fechacompactual=fecha.getFullYear() + '' + ("0" + (fecha.getMonth() + 1)).slice(-2) + '' + ("0" + (fecha.getDate())).slice(-2);
+		//Hora actual
+		var horacompactual=fecha.getHours()+''+("0" + (fecha.getMinutes())).slice(-2)+''+("0" + (fecha.getSeconds())).slice(-2);	
+		//Extraer hora de inicio
+		var horacompainicon=ExtrearHora(fechaconsumoini);
+		//Extraer fecha de inicio	
+		var fechacompainicon=ExtraerFecha(fechaconsumoini);
+		//Extraer hora de finalización
+		var horacompafincon=ExtrearHora(fechaconsumofin);
+		//Extraer fecha de finalización
+		var fechacompafincon=ExtraerFecha(fechaconsumofin);
+		//Comparar el rango de fechas
+		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
+		//Comparar el rago de horas
+		var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
 		
-	var diaact=fecha.getDate();
-	var mesact=(fecha.getMonth()+1);
-	var yearact=fecha.getFullYear();
-	
-	//sacar fecha
-	var fechaci = fechaconsumoini.split("-");
-    var diaini=fechaci[2].substring(0, 2);
-	diaini=diaini.replace("T","");
-	var mesini=fechaci[1];
-	var yearini=fechaci[0];
-	
-	//sacar hora
-    var dathoras = fechaconsumoini.split(":");
-    var segini=dathoras[2];
-	var minini=dathoras[1];
-	var hini=dathoras[0].substring(13, 11);
-	
-	
-	alert("horasin="+dathoras[0]+" hora="+hini+"min="+minini+"seg="+segini);
-	
-    
-	alert("dia="+dia+"mes="+mes+" year="+year);
-  	
+		if(resulfechas==true){
+		   if(resulhoras==true){
+		   }
+			if(resulhoras==false){
+			  alert("La hora del servicio a finalizado");
+			  return false;
+		   }
+		}
+		if(resulfechas==false){
+		   alert("La fecha del servicio a finalizado");
+		}
+	}
 	//Se arma el objeto con los parametros a enviar
 	var datosentc=
 	{
@@ -312,8 +329,7 @@ function validarcedula(){
 	   "Message":null,
 	   "ConRegistro":1,
 	   "CodProducto":""
-	}
-		
+	}		
    var url= sitePath + '/Registro/Add';	  
    $.ajax({ // ajax call starts
           url: url, // JQuery loads serverside
@@ -328,20 +344,32 @@ function validarcedula(){
           data: JSON.stringify(datosentc),			  
           success: function(data) // Variable data contains the data we get from serverside
           {   
-		          conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
+				  conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
 				  //Se valida si el usuario tiene una reserva
 				  estado="si";
-				  estado=RetornarEstado(data,estado);		  				  
+				  estado=RetornarEstado(data,estado);
+                  //Si es control de acceso
+				  if(IndAlerta==0){
+					  alert("La cédula es valida");
+					  document.getElementById("numcedula").value="";
+				  }
+				  //Si tiene derecho a servicios
 				  if(IndAlerta==1 && data.Reservas!=null){ 
+				     var vconsumo=(estado.NumReservas-estado.NumConsumos);
 				      if(data.Reservas!=null){
-					      alert("Su consumo para el día de hoy es :"+estado.DesProducto);
-						  document.getElementById("numcedula").value="";
-					    }  
+					     if(vconsumo!=0){
+						    alert("Su consumo para el día de hoy es :"+estado.DesProducto+"");
+						    document.getElementById("numcedula").value="";
+						 }
+					     else {
+						    alert("El servicio ya fue consumido");
+                         }						 
+					  }  
 					  else {
 					       alert("No existe ningún producto para ser consumido para el día de hoy");
-					    } 
+					   } 
 				    } 	
 						
 			  if(conteventotal>capservicio){
@@ -450,44 +478,41 @@ function closeapp(){
     $.mobile.changePage("#inicio");
 }
 function Trestaurante(op){
-     if(op==1){
-        $.mobile.changePage('#home');
-		}
-		if(op==2){
-		   $.mobile.changePage('#menucontrolscan');
-		}
+	if(op==1){
+	   $.mobile.changePage('#home');
+	}
+	if(op==2){
+	   $.mobile.changePage('#menucontrolscan');
+	}
 }
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
 }
-
-function ConvertDate(fecha){
-
-	//var TempDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-	//var TempDate = ( fecha.getFullYear() + '-' +fecha.getMonth()+1)+'-'+fecha.getDate()+'T'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
-	//return TempDate;
-}
-
-function ImprimirResultSnner(estado,text,tipost,consumo){
-       alert("datos llegaron="+estado+","+text+","+tipost);
-	   if(estado=="si" && tipost==1){
-		   resulret="Usuario valido";
-		}
-		if(estado=="si" && tipost==2){
-		   resulret="Usuario valido";
-		}
-        if(estado=="no" && tipost==1){
-	       resulret="Usuario no valido";
-	    }			
-        document.getElementById("cedula").value=text;
-	    document.getElementById("resultado").value=resulret;
-		if(estado=="si" && tipost==2){
-		   alert("Su consumo para el día de hoy es: "+consumo);
-		}
-		if(estado=="si" && tipost==3){
-		   alert("Usted no tiene nada por consumir");
-		}
+function ImprimirResultSnner(estado,text,tipost,consumo,vconqr){
+	alert("datos llegaron="+estado+","+text+","+tipost);
+	if(estado=="si" && tipost==1){
+	   resulret="Usuario valido";
+	}
+	if(estado=="si" && tipost==2){
+	   resulret="Usuario valido";
+	}
+	if(estado=="no" && tipost==1){
+	   resulret="Usuario no valido";
+	}			
+	document.getElementById("cedula").value=text;
+	document.getElementById("resultado").value=resulret;
+	if(estado=="si" && tipost==2){
+	  if(vconqr!=0){
+	      alert("Su consumo para el día de hoy es: "+consumo);
+	   }
+	   else{
+	      alert("El servicio ya fue consumido");
+	   }
+	}
+	if(estado=="si" && tipost==3){
+	   alert("El usuario no tiene ningún servicio por consumir");
+	}
 }
 function ExtrearHora(horaconver){   
 	//sacar hora
@@ -496,7 +521,6 @@ function ExtrearHora(horaconver){
 	var minini=dathoras[1];
 	var hini=dathoras[0].substring(13, 11);
     var horavl=hini+minini+segini;	
-	alert("horareturno="+horavl);
 	return horavl;	
 }
 function ExtraerFecha(fechacover){
@@ -509,13 +533,17 @@ function ExtraerFecha(fechacover){
 	var fechaval=yearini+mesini+diaini;
 	return fechaval;
 }
-function ComparFechas(dato1,dato2){
-    var resultadocom;
-    if(dato1>dato2){
-	   resultadocom=1;
-	}
-	if(dato1<=dato2){
-	   resultadocom=2;
-	}
-	return resultadocom;
+function ComparFechas(fechaActual, fechaIni, fechaFin) {
+    var isValid = false;
+    if (fechaActual >= fechaIni && fechaActual <= fechaFin) {
+        isValid = true;
+    }
+    return isValid;
+}
+function ComparHoras(horaActual, horaIni, horaFin) {
+    var isValid = false;
+    if (horaActual >= horaIni && horaActual <= horaFin) {
+        isValid = true;
+    }
+    return isValid;
 }
