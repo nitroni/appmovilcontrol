@@ -137,8 +137,10 @@ function validarqr(codigoqr) {
 	}
 	var fecha = new Date();
 	var fechaactual = GetCurrentDate(fecha);
+	
     var estadores;
 	var tienereservas;
+	var consumo="";
 	var datosent=
 	{
 	   "NitProveedor":nitproveedor,
@@ -175,16 +177,18 @@ function validarqr(codigoqr) {
 				  if(IndAlerta==1){
 					  if(data.Reservas!=null){
 						 tienereservas=2;
+						 consumo=data.Reservas[0].DesProducto;
 					  }
 					  else
 					  {
+					    consumo="";
 					    tienereservas=3;
 					  }
 				  }
 				  if(IndAlerta==0){
 				     tienereservas=1;
 				  }
-     		     ImprimirResultSnner(estado,codigoqr,tienereservas);
+     		     ImprimirResultSnner(estado,codigoqr,tienereservas,consumo);
 				  								  
 			  if(conteventotal>capservicio){
 			     capacidadevento(capservicio);
@@ -256,6 +260,47 @@ function validarcedula(){
 	}
 	var fecha = new Date();
 	var fechaactual= GetCurrentDate(fecha);
+	
+	alert("fecha actual="+fechaactual);
+	alert("fecha de consumo ini ="+fechaconsumoini);
+	alert("fecha de consumo final ="+ fechaconsumofin);
+	
+	alert("hora="+fecha.getHours());
+	alert("minutos ="+fecha.getMinutes());
+	alert("segundos ="+ fecha.getSeconds());
+	
+	var horacompactual=fecha.getHours()+''+fecha.getMinutes()+''+fecha.getSeconds();
+	var horacompainicon=ExtrearHora(fechaconsumoini);
+	var resultadocomp=ComparFechas(horacompactual,dato2)
+    
+	
+	
+	
+	alert("horaactual="+horacompactual+ "horaconsumo="+horacompainicon);
+		
+	var diaact=fecha.getDate();
+	var mesact=(fecha.getMonth()+1);
+	var yearact=fecha.getFullYear();
+	
+	//sacar fecha
+	var fechaci = fechaconsumoini.split("-");
+    var diaini=fechaci[2].substring(0, 2);
+	diaini=diaini.replace("T","");
+	var mesini=fechaci[1];
+	var yearini=fechaci[0];
+	
+	//sacar hora
+    var dathoras = fechaconsumoini.split(":");
+    var segini=dathoras[2];
+	var minini=dathoras[1];
+	var hini=dathoras[0].substring(13, 11);
+	
+	
+	alert("horasin="+dathoras[0]+" hora="+hini+"min="+minini+"seg="+segini);
+	
+    
+	alert("dia="+dia+"mes="+mes+" year="+year);
+  	
 	//Se arma el objeto con los parametros a enviar
 	var datosentc=
 	{
@@ -416,7 +461,15 @@ function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
 }
-function ImprimirResultSnner(estado,text,tipost){
+
+function ConvertDate(fecha){
+
+	//var TempDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+	//var TempDate = ( fecha.getFullYear() + '-' +fecha.getMonth()+1)+'-'+fecha.getDate()+'T'+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+	//return TempDate;
+}
+
+function ImprimirResultSnner(estado,text,tipost,consumo){
        alert("datos llegaron="+estado+","+text+","+tipost);
 	   if(estado=="si" && tipost==1){
 		   resulret="Usuario valido";
@@ -430,9 +483,39 @@ function ImprimirResultSnner(estado,text,tipost){
         document.getElementById("cedula").value=text;
 	    document.getElementById("resultado").value=resulret;
 		if(estado=="si" && tipost==2){
-		   alert("Su consumo para el día de hoy es");
+		   alert("Su consumo para el día de hoy es: "+consumo);
 		}
 		if(estado=="si" && tipost==3){
 		   alert("Usted no tiene nada por consumir");
 		}
+}
+function ExtrearHora(horaconver){   
+	//sacar hora
+    var dathoras = horaconver.split(":");
+    var segini=dathoras[2];
+	var minini=dathoras[1];
+	var hini=dathoras[0].substring(13, 11);
+    var horavl=hini+minini+segini;	
+	alert("horareturno="+horavl);
+	return horavl;	
+}
+function ExtraerFecha(fechacover){
+   	//sacar fecha
+	var fechaci = fechacover.split("-");
+    var diaini=fechaci[2].substring(0, 2);
+	diaini=diaini.replace("T","");
+	var mesini=fechaci[1];
+	var yearini=fechaci[0];
+	var fechaval=yearini+mesini+diaini;
+	return fechaval;
+}
+function ComparFechas(dato1,dato2){
+    var resultadocom;
+    if(dato1>dato2){
+	   resultadocom=1;
+	}
+	if(dato1<=dato2){
+	   resultadocom=2;
+	}
+	return resultadocom;
 }
