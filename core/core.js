@@ -16,10 +16,17 @@ var conteventotal="";
 var fechaconsumoini="";
 var fechaconsumofin="";
 var IndAlerta="";
-
+var isAuth = false;
+//para borrar chache
+window.onhashchange = function () {
+    if (isAuth == false) {
+        document.location.href = "#inicio";
+    }
+}
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
+isAuth = true; 
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
 if(datosUsuario!="" && datosPassword!=""){
@@ -36,7 +43,7 @@ if(datosUsuario!="" && datosPassword!=""){
 				  if(data.NomProveedor != null){
 					 $('#coreeventos').empty();
 					 $.mobile.changePage("#home");
-					  ListarEventos(data);		
+					  ListarEventos(data);
 				  }
 				  else{
 					alert("El usuario o la clave no son validos");
@@ -85,9 +92,11 @@ function opcionservicio(cdv,tip,nitpro,cap,valservicio){
      $.mobile.changePage("#menucontrolscan");	 
 }
 function detalleservicio(fechainicio,fechafin,capacidad){
-	 $("#detalle1").text('Fecha de inicio del servicio: '+fechainicio+'');
-	 $("#detalle2").text('Fecha de finalización del servicio: '+fechafin+'');
-	 $("#detalle3").text('Capacidad: '+capacidad+'');
+     fechainicio = new Date(fechainicio);
+     fechafin = new Date(fechafin);
+	 $("#detalle1").text('Fecha de inicio del servicio:<br> '+fechainicio+'');
+	 $("#detalle2").text('Fecha de finalización del servicio:<br> '+fechafin+'');
+	 $("#detalle3").text('Capacidad:<br> '+capacidad+'');
 	 $.mobile.changePage("#detalle");
 }
 function cargarcontador(cdv,tip) {
@@ -352,7 +361,7 @@ function validarcedula(){
 				  estado=RetornarEstado(data,estado);
                   //Si es control de acceso
 				  if(IndAlerta==0){
-					  alert("La cédula es valida");
+					  alert("La cédula es válida");
 					  document.getElementById("numcedula").value="";
 				  }
 				  //Si tiene derecho a servicios
@@ -377,7 +386,7 @@ function validarcedula(){
 			  }			  
           },
 		  error: function(data){
-			  alert("La cédula "+cedula+" no es valida" + data);
+			  alert("La cédula "+cedula+" no es válida" + data);
 		  }
       });
 }
@@ -475,6 +484,7 @@ function capacidadevento(capev){
 function closeapp(){
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
+	isAuth = false;
     $.mobile.changePage("#inicio");
 }
 function Trestaurante(op){
@@ -490,7 +500,6 @@ function GetCurrentDate(fecha){
 	return currentDate;
 }
 function ImprimirResultSnner(estado,text,tipost,consumo,vconqr){
-	alert("datos llegaron="+estado+","+text+","+tipost);
 	if(estado=="si" && tipost==1){
 	   resulret="Usuario valido";
 	}
