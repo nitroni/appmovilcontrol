@@ -3,9 +3,9 @@
         id = "com.nexosapp.controlacceso"
         version = "1.0.0">
 		
-<name>Control de acceso</name>
-<description>Control de acceso</description>
-<author email="nitroni45@gmail.com" href="http://www.nitroni.com">Control de acceso</author>
+<name>Ibono</name>
+<description>Ibono</description>
+<author email="nitroni45@gmail.com" href="http://www.nitroni.com">Ibono</author>
 <icon src="icon.png" />
 <!-- Core plugins -->
 <!--<gap:plugin name="org.apache.cordova.battery-status" />-->
