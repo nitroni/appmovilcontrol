@@ -18,15 +18,15 @@ var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
 //para borrar chache
-window.onhashchange = function () {
+/*window.onhashchange = function () {
     if (isAuth == false) {
         document.location.href = "#inicio";
     }
-}
+}*/
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
-isAuth = true; 
+//isAuth = true; 
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
 if(datosUsuario!="" && datosPassword!=""){
@@ -125,7 +125,6 @@ function Mostrarcontador(datam,codiserv){
 	while (i < datam.Servicios.length){
 		  if (datam.Servicios[i].CodServicio == codiserv) {
 		     total=(datam.Servicios[i].ConEntradas-datam.Servicios[i].ConSalidas);
-			 //$("#datoscontador").append('<ul><li><a href="">Entradas: '+datam.Servicios[i].ConEntradas+'</a></li><li><a href="">Salidas: '+datam.Servicios[i].ConSalidas+'</a></li><li><a href="">Total evento: '+total+'</a></li></ul>');
 	          $("#datoscontador1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
 			  $("#datoscontador2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
 			  $("#datoscontador3").text('Total evento: '+total+'');
@@ -484,7 +483,7 @@ function capacidadevento(capev){
 function closeapp(){
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
-	isAuth = false;
+	//isAuth = false;
     $.mobile.changePage("#inicio");
 }
 function Trestaurante(op){
