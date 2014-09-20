@@ -18,15 +18,15 @@ var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
 //para borrar chache
-/*window.onhashchange = function () {
+window.onhashchange = function () {
     if (isAuth == false) {
         document.location.href = "#inicio";
     }
-}*/
+}
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
-//isAuth = true; 
+isAuth = true; 
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
 if(datosUsuario!="" && datosPassword!=""){
@@ -77,7 +77,11 @@ function ListarEventos(data){
 		     tiposervicio="r";
 		  }
 		  if (NameServicio !== null) {
-			  $("#coreeventos").append('<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="false" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+');" class="ui-btn-text">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" >Detalle</button></div></li><br>');     
+		  
+		 
+		  
+			  var htmlString = '<div class="ui-btn-inner ui-li" style="background-color: #fff;font-size: 16px; height:50px; "><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 30px;width: 100%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 35px;width: 30%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">Detalle</button></div><br><br><br>';
+              $("#coreeventos").append(htmlString);
 		  }
 		 i=i+1;
    }
@@ -92,11 +96,9 @@ function opcionservicio(cdv,tip,nitpro,cap,valservicio){
      $.mobile.changePage("#menucontrolscan");	 
 }
 function detalleservicio(fechainicio,fechafin,capacidad){
-     fechainicio = new Date(fechainicio);
-     fechafin = new Date(fechafin);
-	 $("#detalle1").text('Fecha de inicio del servicio:<br> '+fechainicio+'');
-	 $("#detalle2").text('Fecha de finalización del servicio:<br> '+fechafin+'');
-	 $("#detalle3").text('Capacidad:<br> '+capacidad+'');
+	 $("#detalle1").text('Fecha de inicio del servicio:'+fechainicio+'');
+	 $("#detalle2").text('Fecha de finalización del servicio:'+fechafin+'');
+	 $("#detalle3").text('Capacidad:'+capacidad+'');
 	 $.mobile.changePage("#detalle");
 }
 function cargarcontador(cdv,tip) {
@@ -483,7 +485,7 @@ function capacidadevento(capev){
 function closeapp(){
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
-	//isAuth = false;
+	isAuth = false;
     $.mobile.changePage("#inicio");
 }
 function Trestaurante(op){

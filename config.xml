@@ -25,8 +25,6 @@
 <gap:plugin name="org.apache.cordova.media" />
 <gap:plugin name="org.apache.cordova.network-information" />
 <gap:plugin name="org.apache.cordova.splashscreen" />
-<!-- borrar cache-->
-<gap:plugin name="com.sharinglabs.cordova.plugin.cache" version="1.0.0" />
 
 <gap:platform name="ios" />
 <gap:platform name="android" />
