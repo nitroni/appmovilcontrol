@@ -69,17 +69,12 @@ function ListarEventos(data){
 		 fechaconsumoini=data.Servicios[i].RanIniDisConsumo;
          fechaconsumofin=data.Servicios[i].RanFinDisConsumo;		
          detcapaserv=data.Servicios[i].CapServicio;
-         IndAlerta=	data.Servicios[i].IndAlerta;
-		 
-		 tiposervicio="c";
-		 
+         IndAlerta=	data.Servicios[i].IndAlerta;		 
+		 tiposervicio="c";		 
 		  if(NameServicio=="Restaurante"){
 		     tiposervicio="r";
 		  }
 		  if (NameServicio !== null) {
-		  
-		 
-		  
 			  var htmlString = '<div class="ui-btn-inner ui-li" style="background-color: #fff;font-size: 16px; height:50px; "><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 30px;width: 100%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 35px;width: 30%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">Detalle</button></div><br><br><br>';
               $("#coreeventos").append(htmlString);
 		  }
@@ -96,9 +91,9 @@ function opcionservicio(cdv,tip,nitpro,cap,valservicio){
      $.mobile.changePage("#menucontrolscan");	 
 }
 function detalleservicio(fechainicio,fechafin,capacidad){
-	 $("#detalle1").text('Fecha de inicio del servicio:'+fechainicio+'');
-	 $("#detalle2").text('Fecha de finalización del servicio:'+fechafin+'');
-	 $("#detalle3").text('Capacidad:'+capacidad+'');
+	 $("#detalle1").text(''+fechainicio+'');
+	 $("#detalle2").text(''+fechafin+'');
+	 $("#detalle3").text(''+capacidad+'');
 	 $.mobile.changePage("#detalle");
 }
 function cargarcontador(cdv,tip) {
@@ -126,7 +121,7 @@ function Mostrarcontador(datam,codiserv){
 	var total=0;
 	while (i < datam.Servicios.length){
 		  if (datam.Servicios[i].CodServicio == codiserv) {
-		     total=(datam.Servicios[i].ConEntradas-datam.Servicios[i].ConSalidas);
+		      total=(datam.Servicios[i].ConEntradas-datam.Servicios[i].ConSalidas);
 	          $("#datoscontador1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
 			  $("#datoscontador2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
 			  $("#datoscontador3").text('Total evento: '+total+'');
