@@ -84,6 +84,9 @@ function opcionservicio(cdv,tip,nitpro,cap,valservicio){
 	 capservicio=cap;
 	 IndAlerta=valservicio;
      cargarcontador(cdv,tip);
+	 document.getElementById("cedula").value="";
+	 document.getElementById("resultado").value="";
+	 document.getElementById("numcedula").value="";	 
      $.mobile.changePage("#menucontrolscan");	 
 }
 function detalleservicio(fechainicio,fechafin,capacidad){
@@ -371,8 +374,7 @@ function validarcedula(){
 					  else {
 					       alert("No existe ningún producto para ser consumido para el día de hoy");
 					   } 
-				    } 	
-						
+				    } 							
 			  if(conteventotal>capservicio){
 			      capacidadevento(capservicio);
 			  }			  
@@ -484,14 +486,7 @@ function closeapp(){
 	ClearCache(isAuth);
     $.mobile.changePage("#inicio");
 }
-function Trestaurante(op){
-	if(op==1){
-	   $.mobile.changePage('#home');
-	}
-	if(op==2){
-	   $.mobile.changePage('#menucontrolscan');
-	}
-}
+º
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
