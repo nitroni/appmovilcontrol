@@ -494,12 +494,9 @@ function closeapp(){
 	ClearCache(isAuth);
     $.mobile.changePage("#inicio");
 	document.addEventListener("backbutton", onBackKeyDown, false);
-
 }
 function onBackKeyDown() {
-    alert("cerro la aplicacion");
 }
-
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
