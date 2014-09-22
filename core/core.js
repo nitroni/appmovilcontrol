@@ -20,6 +20,14 @@ var isAuth = false;
 var r="no";
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
+//para borrar chache
+window.onhashchange = function () {
+     //ClearCache(isAuth);	
+	if (isAuth == false) {
+        document.location.href = "#inicio";
+    }
+}
+
 function ValidarLogin() {
 isAuth = true; 
 r="si";
@@ -551,14 +559,9 @@ function ComparHoras(horaActual, horaIni, horaFin) {
     }
     return isValid;
 }
-//para borrar chache
-window.onhashchange = function () {
-    if(r=="no"){
-       ClearCache(isAuth);
-	}
-}
+
 function ClearCache(clcach){
-  if (clcach == false && r=="no") {
+  if (clcach == false) {
         document.location.href = "#inicio";
     }
 }
