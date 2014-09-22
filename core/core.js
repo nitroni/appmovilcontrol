@@ -18,7 +18,7 @@ var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
 var r="no";
-var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
+var sitePath = 'http://181.48.24.156:8183/Servicios/api';
 
 //para borrar chache
 /*window.onhashchange = function () {
