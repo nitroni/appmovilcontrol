@@ -477,8 +477,11 @@ function closeapp(){
     r="no";
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
-	//isAuth = false;
-	//ClearCache(isAuth);
+	document.getElementById("cedula").value="";
+	document.getElementById("resultado").value="";
+	document.getElementById("numcedula").value="";	
+	isAuth = false;
+	ClearCache(isAuth);
     $.mobile.changePage("#inicio");
 }
 function Trestaurante(op){
@@ -502,7 +505,10 @@ function ImprimirResultSnner(estado,text,tipost,consumo,vconqr){
 	}
 	if(estado=="no" && tipost==1){
 	   resulret="Usuario no valido";
-	}			
+	}
+	if(estado=="no" && tipost==3){
+	   resulret="Usuario no valido";
+	}
 	document.getElementById("cedula").value=text;
 	document.getElementById("resultado").value=resulret;
 	if(estado=="si" && tipost==2){

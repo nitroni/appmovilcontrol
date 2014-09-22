@@ -6,8 +6,6 @@ scanner.scan(
     function (result) 
 	{
 	  resulval=validarqr(result.text);
-	  alert("resultadoretornado :"+result.text);
-
     }, 
         function (error) 
 	    {
