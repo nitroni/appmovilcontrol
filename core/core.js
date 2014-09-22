@@ -17,12 +17,6 @@ var fechaconsumoini="";
 var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
-//para borrar chache
-window.onhashchange = function () {
-    if (isAuth == false) {
-        document.location.href = "#inicio";
-    }
-}
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
@@ -551,4 +545,11 @@ function ComparHoras(horaActual, horaIni, horaFin) {
         isValid = true;
     }
     return isValid;
+}
+//para borrar chache
+alert("hola mundo");
+window.onhashchange = function () {
+    if (isAuth == false) {
+        document.location.href = "#inicio";
+    }
 }
