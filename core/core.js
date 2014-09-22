@@ -17,10 +17,12 @@ var fechaconsumoini="";
 var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
+var r="no";
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 function ValidarLogin() {
 isAuth = true; 
+r="si";
 datosUsuario = $("#nombredeusuario").val();
 datosPassword = $("#clave").val();	
 if(datosUsuario!="" && datosPassword!=""){
@@ -472,10 +474,12 @@ function capacidadevento(capev){
 }
 //Se define la función del botón cerrar sesión
 function closeapp(){
+    r="no";
     document.getElementById("nombredeusuario").value="";
 	document.getElementById("clave").value="";
 	isAuth = false;
-    $.mobile.changePage("#inicio");
+	ClearCache(isAuth);
+    //$.mobile.changePage("#inicio");
 }
 function Trestaurante(op){
 	if(op==1){
@@ -547,9 +551,13 @@ function ComparHoras(horaActual, horaIni, horaFin) {
     return isValid;
 }
 //para borrar chache
-alert("hola mundo");
 window.onhashchange = function () {
-    if (isAuth == false) {
+    if(r=="no"){
+       ClearCache(isAuth);
+	}
+}
+function ClearCache(clcach){
+  if (clcach == false && r=="no") {
         document.location.href = "#inicio";
     }
 }
