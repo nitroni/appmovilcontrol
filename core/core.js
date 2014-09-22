@@ -21,12 +21,12 @@ var r="no";
 var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 
 //para borrar chache
-window.onhashchange = function () {
+/*window.onhashchange = function () {
      //ClearCache(isAuth);	
 	if (isAuth == false) {
-        document.location.href = "#inicio";
+        document.addEventListener("backbutton", yourCallbackFunction, false);
     }
-}
+}*/
 
 function ValidarLogin() {
 isAuth = true; 
@@ -493,8 +493,13 @@ function closeapp(){
 	isAuth = false;
 	ClearCache(isAuth);
     $.mobile.changePage("#inicio");
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
 }
-º
+function onBackKeyDown() {
+    alert("cerro la aplicacion");
+}
+
 function GetCurrentDate(fecha){
 	var currentDate = (fecha.getMonth()+1)+'/'+fecha.getDate()+'/'+fecha.getFullYear()+' '+fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
 	return currentDate;
