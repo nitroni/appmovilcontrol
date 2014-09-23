@@ -29,9 +29,10 @@ var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
 }*/
 //Definimos que la aplicación no tendrá efectos de transición para que funcione más rapido
 $(document).bind("mobileinit", function(){
+    $.event.special.swipe.scrollSupressionThreshold = 100;
 	$.mobile.defaultPageTransition="none";
 	$.mobile.transitionFallbacks='none';
-	$.mobile.defaultDialogTransition = 'none';
+	$.mobile.defaultDialogTransition = 'none';	
 });
 function ValidarLogin() {
 	isAuth = true; 
