@@ -27,44 +27,46 @@ var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
         document.addEventListener("backbutton", yourCallbackFunction, false);
     }
 }*/
+//Definimos que la aplicación no tendrá efectos de transición para que funcione más rapido
 $(document).bind("mobileinit", function(){
-  $.mobile.defaultPageTransition="none"
+	$.mobile.defaultPageTransition="none";
+	$.mobile.transitionFallbacks='none';
+	$.mobile.defaultDialogTransition = 'none';
 });
-
 function ValidarLogin() {
-isAuth = true; 
-r="si";
-datosUsuario = $("#nombredeusuario").val();
-datosPassword = $("#clave").val();	
-if(datosUsuario!="" && datosPassword!=""){
-	var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'&clave='+datosPassword+'';		
-		$.ajax({ // ajax call starts
-			  url: url, // JQuery loads serverside.php 
-			  type:"GET",
-			  dataType: 'json', // Choosing a JSON datatype
-			  timeout: 5000,	
-			  crossDomain: true,		  
-			  success: function(data) // Variable data contains the data we get from serverside
-			  {
-				  datosg=data;
-				  if(data.NomProveedor != null){
-				     //document.addEventListener("backbutton", onBackKeyDown, true);
-					 $('#coreeventos').empty();
-					 $.mobile.changePage("#home");
-					  ListarEventos(data);
+	isAuth = true; 
+	r="si";
+	datosUsuario = $("#nombredeusuario").val();
+	datosPassword = $("#clave").val();	
+	if(datosUsuario!="" && datosPassword!=""){
+		var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'&clave='+datosPassword+'';		
+			$.ajax({ // ajax call starts
+				  url: url, // JQuery loads serverside.php 
+				  type:"GET",
+				  dataType: 'json', // Choosing a JSON datatype
+				  timeout: 5000,	
+				  crossDomain: true,		  
+				  success: function(data) // Variable data contains the data we get from serverside
+				  {
+					  datosg=data;
+					  if(data.NomProveedor != null){
+						 //document.addEventListener("backbutton", onBackKeyDown, true);
+						 $('#coreeventos').empty();
+						 $.mobile.changePage("#home");
+						  ListarEventos(data);
+					  }
+					  else{
+						alert("El usuario o la clave no son validos");
+					  }	   
+				  },
+				  error: function(data){
+					   alert("Error de conexión");
 				  }
-				  else{
-					alert("El usuario o la clave no son validos");
-				  }	   
-			  },
-			  error: function(data){
-				   alert("Error de conexión");
-			  }
-		  });
-	  }
-	  else{
-	      alert("Los campos no pueden estar en blanco");
-	  }
+			  });
+		  }
+		  else{
+			  alert("Los campos no pueden estar en blanco");
+		  }
 }
 function ListarEventos(data){
  var i=0;
@@ -152,8 +154,7 @@ function validarqr(codigoqr) {
 	   return false;
 	}
 	var fecha = new Date();
-	var fechaactual = GetCurrentDate(fecha);
-	
+	var fechaactual = GetCurrentDate(fecha);	
 	if(IndAlerta==1){
 		//Validar la fecha de consumo inicial
 		//Fecha actual
@@ -566,7 +567,6 @@ function ComparHoras(horaActual, horaIni, horaFin) {
     }
     return isValid;
 }
-
 function ClearCache(clcach){
   if (clcach == false) {
         document.location.href = "#inicio";
