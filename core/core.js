@@ -45,7 +45,7 @@ if(datosUsuario!="" && datosPassword!=""){
 			  {
 				  datosg=data;
 				  if(data.NomProveedor != null){
-				     document.addEventListener("backbutton", onBackKeyDown, true);
+				     //document.addEventListener("backbutton", onBackKeyDown, true);
 					 $('#coreeventos').empty();
 					 $.mobile.changePage("#home");
 					  ListarEventos(data);
@@ -494,7 +494,8 @@ function closeapp(){
 	isAuth = false;
 	ClearCache(isAuth);
     $.mobile.changePage("#inicio");
-	document.addEventListener("backbutton", onBackKeyDown, false);
+	//document.addEventListener("backbutton", onBackKeyDown, false);
+	navigator.app.exitApp();
 }
 function onBackKeyDown() {
 }
