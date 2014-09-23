@@ -26,6 +26,7 @@
 <gap:plugin name="org.apache.cordova.network-information" />
 <gap:plugin name="org.apache.cordova.splashscreen" />
 
+<preference name="splash-screen-duration" value="2000" />
 <gap:splash src="images/bg_log_in.png"/>
 <gap:platform name="ios" />
 <gap:platform name="android" />
