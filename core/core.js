@@ -45,6 +45,7 @@ if(datosUsuario!="" && datosPassword!=""){
 			  {
 				  datosg=data;
 				  if(data.NomProveedor != null){
+				     document.addEventListener("backbutton", onBackKeyDown, true);
 					 $('#coreeventos').empty();
 					 $.mobile.changePage("#home");
 					  ListarEventos(data);
