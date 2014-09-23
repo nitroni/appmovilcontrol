@@ -328,7 +328,7 @@ function validarcedula(){
 		   }
 		}
 		if(resulfechas==false){
-		   alert("La fecha del servicio a finalizado");
+		   alert("La fecha del servicio ha finalizado");
 		}
 	}
 	//Se arma el objeto con los parametros a enviar
