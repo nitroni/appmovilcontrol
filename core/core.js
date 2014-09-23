@@ -18,7 +18,7 @@ var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
 var r="no";
-var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
+var sitePath = 'http://181.48.24.156:8183/Servicios/api';
 
 //para borrar chache
 /*window.onhashchange = function () {
@@ -57,7 +57,7 @@ function ValidarLogin() {
 						  ListarEventos(data);
 					  }
 					  else{
-						alert("El usuario o la clave no son validos");
+						alert("El usuario o la clave no son válidos");
 					  }	   
 				  },
 				  error: function(data){
@@ -328,7 +328,7 @@ function validarcedula(){
 		   if(resulhoras==true){
 		   }
 			if(resulhoras==false){
-			  alert("La hora del servicio a finalizado");
+			  alert("La hora del servicio ha finalizado");
 			  return false;
 		   }
 		}
@@ -510,16 +510,16 @@ function GetCurrentDate(fecha){
 }
 function ImprimirResultSnner(estado,text,tipost,consumo,vconqr){
 	if(estado=="si" && tipost==1){
-	   resulret="Usuario valido";
+	   resulret="Usuario válido";
 	}
 	if(estado=="si" && tipost==2){
-	   resulret="Usuario valido";
+	   resulret="Usuario válido";
 	}
 	if(estado=="no" && tipost==1){
-	   resulret="Usuario no valido";
+	   resulret="Usuario no válido";
 	}
 	if(estado=="no" && tipost==3){
-	   resulret="Usuario no valido";
+	   resulret="Usuario no válido";
 	}
 	document.getElementById("cedula").value=text;
 	document.getElementById("resultado").value=resulret;
