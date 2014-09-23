@@ -27,6 +27,9 @@ var sitePath = 'http://181.48.24.156:8183/ServiciosDesa/api';
         document.addEventListener("backbutton", yourCallbackFunction, false);
     }
 }*/
+$(document).bind("mobileinit", function(){
+  $.mobile.defaultPageTransition="none"
+});
 
 function ValidarLogin() {
 isAuth = true; 
