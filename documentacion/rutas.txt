@@ -4,6 +4,14 @@ http://181.48.24.156:8183/Servicios/api/Consumidor/Filter/?usuario=jdblandon&cla
 http://181.48.24.156:8183/Servicios/api/Registro/Add
 {"NitProveedor": 999999999.0,"CedConsumidor": 0,"CodServicio": "SRV001","FecEntrada": "01/01/2014 09:08:03","TipRegistro": "S","Message": null,"ConRegistro": 50, "CodProducto" : ""}
 
+productos
+http://181.48.24.156:8183/ServiciosDesa/api/Producto/Filter/?nit=999999999&codServicio=SRV002&cedConsumidor=713999
+Para guardar la reserva
+http://181.48.24.156:8183/Servicios/api/Reserva/Add
+formato de la cadena:
+{"NitProveedor": 999999999.0,"CedConsumidor": 713999,"CodServicio": "SRV002", "CodProducto" : "PRD001","FecReserva": "09/17/2014 16:08:03","NumReservas": 1,"Message": null}
+
+
 
 Desarrollo:
 http://181.48.24.156:8183/ServiciosDesa/api/Consumidor/Filter/?usuario=jdblandon&clave=986831
