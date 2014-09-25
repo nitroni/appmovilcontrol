@@ -35,7 +35,7 @@
 	<li><a href="" id="datoscontador1"></a></li>
 	<li><a href="" id="datoscontador2"></a></li>
     <li><a href="" id="datoscontador3"></a></li>   	
-	
+	</ul>
 </div>
 	</div> 
 	<div data-role="content">	
@@ -43,11 +43,11 @@
 		<p>
 		<div class="colortext">Número de c&eacute;dula escaneada:</div>
 		<p>
-		<input type="text" value="" id="cedula" name="cedula" />
+		<input type="text" value="" id="cedula" name="cedula" readonly="readonly"/>
 		<p>
-		<div class="colortext">El usuario es válido?</div>
+		<div class="colortext">¿El usuario es válido?</div>
 		<p>
-		<input type="text" value="" id="resultado" name="resultado" />	
+		<input type="text" value="" id="resultado" name="resultado" readonly="readonly"/>	
 		<p>
         <p>
 		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>
@@ -56,7 +56,8 @@
 <!-- menu2 control de acceso-->
 <div data-role="page" id="menucontrolscan" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
-		<h1>Control de acceso</h1><div data-role="navbar" id="datconuno" name="datconuno">
+		<p class="colortext" id="tilmencontrol">Control de acceso</p>
+		<div data-role="navbar" id="datconuno" name="datconuno">
 	<ul>
 	<li><a href="" id="datconuno1"></a></li>
 	<li><a href="" id="datconuno2"></a></li>
@@ -134,13 +135,23 @@
 <div data-role="page" id="ctvalcedula" class="contenido">
 	<div data-role="header"><div class="logobar" align="center"></div>
 		<h1>Validar c&eacute;dula</h1>
+    <div data-role="navbar" id="datoscontador" name="datoscontador">
+		<ul>
+		 <li><a href="" id="datoscontadorcd1"></a></li>
+		 <li><a href="" id="datoscontadorcd2"></a></li>
+		 <li><a href="" id="datoscontadorcd3"></a></li>   	
+		</ul>
+</div>
 	</div>    
-	<div data-role="content">	
+	<div data-role="content">
+	<br> <br>
 		<div class="colortext"> C&eacute;dula</div>
 		<input type="number" id="numcedula" name="numcedula" onKeyDown="if(this.value.length==17) return false;">
 		<br>
 		<br>
-		<button id = "vcedu" onclick="validarcedula();">Confirmar c&eacute;dula</button>	
+		<button id = "vcedu" onclick="validarcedula();">Confirmar c&eacute;dula</button>
+        <p><p><br>
+		<input type="submit" value="Cerrar sesi&oacute;n" id="cerrar" onclick="closeapp()"/>		
 	</div>	 
 </div>
 <!-- Egresar usuarios -->

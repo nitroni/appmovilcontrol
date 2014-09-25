@@ -17,6 +17,7 @@ var fechaconsumoini="";
 var fechaconsumofin="";
 var IndAlerta="";
 var isAuth = false;
+var nameservice="";
 var r="no";
 var sitePath = 'http://181.48.24.156:8183/Servicios/api';
 
@@ -80,19 +81,19 @@ function ListarEventos(data){
 		 fechaconsumoini=data.Servicios[i].RanIniDisConsumo;
          fechaconsumofin=data.Servicios[i].RanFinDisConsumo;		
          detcapaserv=data.Servicios[i].CapServicio;
-         IndAlerta=	data.Servicios[i].IndAlerta;		 
+         IndAlerta=	data.Servicios[i].IndAlerta;
 		 tiposervicio="c";		 
 		  if(NameServicio=="Restaurante"){
 		     tiposervicio="r";
 		  }
 		  if (NameServicio !== null) {
-			  var htmlString = '<div class="ui-btn-inner ui-li" style="background-color: #fff;font-size: 16px; height:50px; "><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 30px;width: 100%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 35px;width: 30%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">Detalle</button></div><br><br><br>';
+			  var htmlString = '<div class="ui-btn-inner ui-li" style="background-color: #fff;font-size: 16px; height:50px; "><div class="ui-btn-text"><button id = "vcedu"  onclick="opcionservicio('+"'"+codigoservicio+"'"+',tiposervicio,'+"'"+nitproveedor+"'"+','+"'"+detcapaserv+"'"+','+"'"+IndAlerta+"'"+','+"'"+NameServicio+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 30px;width: 100%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">'+NameServicio+'</button></div><button id = "vcedu"  onclick="detalleservicio('+"'"+detfechainiserv+"'"+','+"'"+detfechafinserv+"'"+','+"'"+detcapaserv+"'"+');" style="background-color: #fff;font-size: 16px;clear: left;height: 35px;width: 30%;margin-right: 10px;padding: 5px; float: center;border-width: 1px;border-color: #7f7f7f;border-style: dashed;">Detalle</button></div><br><br><br>';
               $("#coreeventos").append(htmlString);
 		  }
 		 i=i+1;
    }
 }
-function opcionservicio(cdv,tip,nitpro,cap,valservicio){   
+function opcionservicio(cdv,tip,nitpro,cap,valservicio,nameservice){   
      cdv.replace(' ','');
 	 tiposervice=cdv;
 	 nitproveedor=nitpro;
@@ -102,6 +103,7 @@ function opcionservicio(cdv,tip,nitpro,cap,valservicio){
 	 document.getElementById("cedula").value="";
 	 document.getElementById("resultado").value="";
 	 document.getElementById("numcedula").value="";	 
+	 $("#tilmencontrol").text(''+nameservice+'');
      $.mobile.changePage("#menucontrolscan");	 
 }
 function detalleservicio(fechainicio,fechafin,capacidad){
@@ -144,7 +146,10 @@ function Mostrarcontador(datam,codiserv){
 	          $("#datconuno3").text('Total evento: '+total+''); 
               $("#contegresar1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
 	          $("#contegresar2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
-	          $("#contegresar3").text('Total evento: '+total+''); 	 
+	          $("#contegresar3").text('Total evento: '+total+''); 
+			  $("#datoscontadorcd1").text('Entradas: '+datam.Servicios[i].ConEntradas+'');
+	          $("#datoscontadorcd2").text('Salidas: '+datam.Servicios[i].ConSalidas+'');
+	          $("#datoscontadorcd3").text('Total evento: '+total+''); 
 		  }
 		  i=i+1;
     }           			  			  				
@@ -173,7 +178,8 @@ function validarqr(codigoqr) {
 		//Comparar el rango de fechas
 		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
 		//Comparar el rago de horas
-		var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
 		
 		if(resulfechas==true){
 		   if(resulhoras==true){
@@ -293,7 +299,10 @@ function updatecounter(entrada,salida){
 	   $("#datconuno3").text('Total evento: '+numpersonevento+''); 	
 	   $("#contegresar1").text('Entradas: '+entrada+'');
 	   $("#contegresar2").text('Salidas: '+salida+'');
-	   $("#contegresar3").text('Total evento: '+numpersonevento+''); 	
+	   $("#contegresar3").text('Total evento: '+numpersonevento+'');
+	   $("#datoscontadorcd1").text('Entradas: '+entrada+'');
+	   $("#datoscontadorcd2").text('Salidas: '+salida+'');
+	   $("#datoscontadorcd3").text('Total evento: '+numpersonevento+''); 	   
 }
 function validarcedula(){
     var cedula=document.getElementById("numcedula").value;
@@ -322,7 +331,10 @@ function validarcedula(){
 		//Comparar el rango de fechas
 		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
 		//Comparar el rago de horas
-		var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
+
+		alert("este es el resultado="+resulhoras);
 		
 		if(resulfechas==true){
 		   if(resulhoras==true){
@@ -400,7 +412,48 @@ function validarcedula(){
 }
 function validaranonimo(){
     var fecha = new Date();
-    var fechaactual = GetCurrentDate(fecha);
+    var fechaactual = GetCurrentDate(fecha);	
+	if(IndAlerta==1){
+		//Validar la fecha de consumo inicial
+		//Fecha actual
+		var fechacompactual=fecha.getFullYear() + '' + ("0" + (fecha.getMonth() + 1)).slice(-2) + '' + ("0" + (fecha.getDate())).slice(-2);
+		//Hora actual
+		var horacompactual=fecha.getHours()+''+("0" + (fecha.getMinutes())).slice(-2)+''+("0" + (fecha.getSeconds())).slice(-2);	
+		//Extraer hora de inicio
+		var horacompainicon=ExtrearHora(fechaconsumoini);
+		//Extraer fecha de inicio	
+		var fechacompainicon=ExtraerFecha(fechaconsumoini);
+		//Extraer hora de finalización
+		var horacompafincon=ExtrearHora(fechaconsumofin);
+		//Extraer fecha de finalización
+		var fechacompafincon=ExtraerFecha(fechaconsumofin);
+		//Comparar el rango de fechas
+		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
+		//Comparar el rago de horas
+		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
+		
+		//alert("fechasondumo anonimo="+resulhoras+" fecha ini="+fechacompainicon+" fecha fin="+fechacompafincon+" fecha actual="+fechacompactual+" ressultado fecha="+resulfechas+' hola ini='+horacompainicon+' horafin='+horacompafincon);
+		var comparesful="";
+		if(resulfechas==true){
+		   if(resulhoras==true){
+		      comparesful=1;
+		   }
+			if(resulhoras==false){
+			  alert("La hora habilitada para este servicio ha finalizado");
+			  return false;
+			  comparesful=2;
+		   }
+		}
+		if(resulfechas==false){
+		   alert("La fecha del servicio ha finalizado");
+		   comparesful=2;
+		}
+    }
+	if(comparesful==2){
+	   alert("El usuario anónimo no ha sido contado por vencimiento de fecha");
+	}	
+  if(comparesful==1){
 	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
@@ -442,6 +495,7 @@ function validaranonimo(){
 		       alert("Error de conexión al servidor");
 		  }
       });
+    }
 }
 function egresarusuarios(){
     var fecha = new Date();
@@ -572,4 +626,35 @@ function ClearCache(clcach){
   if (clcach == false) {
         document.location.href = "#inicio";
     }
+}
+function CompararHora(fechareservacomh,fechafinal,fechainicial,horafinal,horainicial,horareservacomh) {
+    var isValid = false;
+    if(fechareservacomh==fechafinal){
+	   if(horareservacomh>horafinal){
+	      isValid= false;
+	   } 
+	   if(horareservacomh<=horafinal){
+	      isValid= true;
+	   }			
+	}
+	if(fechareservacomh==fechainicial){
+	  if(horareservacomh < horainicial){
+	     isValid= false;
+	   }
+	   if(horareservacomh >= horainicial){
+	     isValid= true;
+	   }
+	}
+	if(fechareservacomh < fechainicial && fechareservacomh != fechainicial){
+	   if(horareservacomh > horafinal){
+	      isValid= false;
+	   } 
+	   if(horareservacomh<=horafinal){
+	      isValid= true;
+	   }
+	}
+	if(fechareservacomh > fechainicial && fechareservacomh != fechafinal){
+	   isValid= true;
+	}
+    return isValid;
 }
