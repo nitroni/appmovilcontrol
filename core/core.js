@@ -333,14 +333,12 @@ function validarcedula(){
 		//Comparar el rago de horas
 		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
 		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
-
-		alert("este es el resultado="+resulhoras);
 		
 		if(resulfechas==true){
 		   if(resulhoras==true){
 		   }
 			if(resulhoras==false){
-			  alert("La hora del servicio ha finalizado");
+			   alert("La hora del servicio ha finalizado");
 			  return false;
 		   }
 		}
@@ -440,9 +438,9 @@ function validaranonimo(){
 		      comparesful=1;
 		   }
 			if(resulhoras==false){
-			  alert("La hora habilitada para este servicio ha finalizado");
-			  return false;
-			  comparesful=2;
+			   alert("La hora habilitada para este servicio ha finalizado");
+			   return false;
+			   comparesful=2;
 		   }
 		}
 		if(resulfechas==false){
@@ -500,6 +498,40 @@ function validaranonimo(){
 function egresarusuarios(){
     var fecha = new Date();
     var fechaactual = GetCurrentDate(fecha);
+	
+	if(IndAlerta==1){
+		//Validar la fecha de consumo inicial
+		//Fecha actual
+		var fechacompactual=fecha.getFullYear() + '' + ("0" + (fecha.getMonth() + 1)).slice(-2) + '' + ("0" + (fecha.getDate())).slice(-2);
+		//Hora actual
+		var horacompactual=fecha.getHours()+''+("0" + (fecha.getMinutes())).slice(-2)+''+("0" + (fecha.getSeconds())).slice(-2);	
+		//Extraer hora de inicio
+		var horacompainicon=ExtrearHora(fechaconsumoini);
+		//Extraer fecha de inicio	
+		var fechacompainicon=ExtraerFecha(fechaconsumoini);
+		//Extraer hora de finalización
+		var horacompafincon=ExtrearHora(fechaconsumofin);
+		//Extraer fecha de finalización
+		var fechacompafincon=ExtraerFecha(fechaconsumofin);
+		//Comparar el rango de fechas
+		var resulfechas=ComparFechas(fechacompactual,fechacompainicon,fechacompafincon);
+		//Comparar el rago de horas
+		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
+		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
+		
+		if(resulfechas==true){
+		   if(resulhoras==true){
+		   }
+			if(resulhoras==false){
+			  alert("La hora habilitada para este servicio ha finalizado");
+			  return false;
+		   }
+		}
+		if(resulfechas==false){
+		   alert("La fecha del servicio ha finalizado");
+		}
+    }	
+	
 	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
