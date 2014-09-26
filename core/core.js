@@ -40,6 +40,10 @@ function ValidarLogin() {
 	r="si";
 	datosUsuario = $("#nombredeusuario").val();
 	datosPassword = $("#clave").val();	
+	
+	var vallog=validarDatos(datosUsuario);
+	
+	
 	if(datosUsuario!="" && datosPassword!=""){
 		var url= sitePath + '/Proveedor/Filter/?id='+datosUsuario+'&clave='+datosPassword+'';		
 			$.ajax({ // ajax call starts
@@ -430,7 +434,6 @@ function validaranonimo(){
 		//Comparar el rago de horas
 		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
 		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
-		
 		//alert("fechasondumo anonimo="+resulhoras+" fecha ini="+fechacompainicon+" fecha fin="+fechacompafincon+" fecha actual="+fechacompactual+" ressultado fecha="+resulfechas+' hola ini='+horacompainicon+' horafin='+horacompafincon);
 		var comparesful="";
 		if(resulfechas==true){
@@ -450,8 +453,10 @@ function validaranonimo(){
     }
 	if(comparesful==2){
 	   alert("El usuario anónimo no ha sido contado por vencimiento de fecha");
+	   return false;
 	}	
-  if(comparesful==1){
+	if(comparesful==1){
+	}
 	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
@@ -493,7 +498,6 @@ function validaranonimo(){
 		       alert("Error de conexión al servidor");
 		  }
       });
-    }
 }
 function egresarusuarios(){
     var fecha = new Date();
@@ -519,19 +523,29 @@ function egresarusuarios(){
 		//var resulhoras=ComparHoras(horacompactual, horacompainicon, horacompafincon);
 		var resulhoras=CompararHora(fechacompactual,fechacompafincon,fechacompainicon,horacompafincon,horacompainicon,horacompactual);
 		
+		var comparesful="";
+		
 		if(resulfechas==true){
 		   if(resulhoras==true){
+		      comparesful=1;
 		   }
 			if(resulhoras==false){
 			  alert("La hora habilitada para este servicio ha finalizado");
 			  return false;
+			  comparesful=2;
 		   }
 		}
 		if(resulfechas==false){
 		   alert("La fecha del servicio ha finalizado");
+		   comparesful=2;
 		}
     }	
-	
+	if(comparesful==2){
+	   alert("El usuario Egresado no ha sido descontado por vencimiento de fecha");
+	   return false;
+	}	
+    if(comparesful==1){ 
+	}
 	var datosenta=
 	{
 	   "NitProveedor":nitproveedor,
@@ -560,10 +574,10 @@ function egresarusuarios(){
 		      conteventotal=(data.ConEntradasServicio-data.ConSalidasServicio);
 				  $('.cont').empty();
 				  updatecounter(data.ConEntradasServicio,data.ConSalidasServicio);
-				  alert("Usuario descontado");
+				  //alert("Usuario descontado");
 			  
 			  if(conteventotal>capservicio){
-			      capacidadevento(capservicio);
+			      //capacidadevento(capservicio);
 			  }	
           },
 		  error: function(data){
@@ -689,4 +703,11 @@ function CompararHora(fechareservacomh,fechafinal,fechainicial,horafinal,horaini
 	   isValid= true;
 	}
     return isValid;
+}
+function validarDatos(cadena){
+  var patron = /^[a-zA-Z]*$/;
+  if(!cadena.search(patron))
+    return true;
+  else
+    return false;
 }
